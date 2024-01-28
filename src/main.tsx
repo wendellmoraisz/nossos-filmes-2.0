@@ -19,6 +19,9 @@ const defautTheme = createTheme({
     secondary: {
       main: "#242A32"
     }
+  },
+  typography: {
+    fontFamily: "Poppins"
   }
 });
 
