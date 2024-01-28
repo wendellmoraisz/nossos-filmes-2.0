@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/Login.tsx";
 import { createTheme, ThemeProvider } from "@mui/material";
 import AuthProvider from "./context/AuthProvider.tsx";
+import { Toaster } from "react-hot-toast";
 
 const defautTheme = createTheme({
   palette: {
@@ -34,6 +35,16 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <AuthProvider>
         <RouterProvider router={router} />
       </AuthProvider>
+      <Toaster
+        toastOptions={{
+          duration: 2000,
+          style: {
+            background: "#242A32",
+            color: "#FFF",
+            boxShadow: "1px 5px 14px 1px rgba(0, 0, 0, 0.2)"
+          }
+        }}
+      />
     </ThemeProvider>
   </React.StrictMode>,
 )
