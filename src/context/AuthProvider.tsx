@@ -26,7 +26,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     
     const verifyLocalUser = () => {
         const localUser = JSON.parse(window.localStorage.getItem(import.meta.env.VITE_AUTH_STORAGE as string) as string);
-        if (localUser) setUser(user);
+        if (localUser) setUser(localUser);
     }
 
     const login = async (user: AuthUser) => {
