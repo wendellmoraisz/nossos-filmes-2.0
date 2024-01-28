@@ -32,7 +32,6 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     const login = async (user: AuthUser) => {
         const loginResponse = await firebase.login(user.email, user.password);
         const firebaseUser = await firebase.getUserById(loginResponse.user.uid);
-        console.log(loginResponse)
         saveUserLocally(firebaseUser as User);
     }
 
