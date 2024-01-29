@@ -2,7 +2,7 @@ import React from "react";
 import { Container, CssBaseline, Box, Avatar, Typography, FormControl, TextField, Button, Grid } from "@mui/material";
 import Logo from "../assets/nossos-filmes-logo.png";
 import useAuth from "../hooks/useAuth";
-import AuthUser from "../interfaces/AuthUser";
+import AuthUser from "../@types/AuthUser";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";

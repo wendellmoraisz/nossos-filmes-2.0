@@ -1,6 +1,6 @@
 import { useState, createContext, useEffect, ReactNode } from "react";
-import User from "../interfaces/User";
-import AuthUser from "../interfaces/AuthUser";
+import User from "../@types/User";
+import AuthUser from "../@types/AuthUser";
 import * as firebase from "../services/firebaseService";
 
 interface AuthContext {
