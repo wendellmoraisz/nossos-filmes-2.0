@@ -1,7 +1,7 @@
 import { useState, createContext, useEffect, ReactNode } from "react";
 import User from "../@types/User";
 import AuthUser from "../@types/AuthUser";
-import * as firebase from "../services/firebaseService";
+import * as userService from "../services/userService";
 
 interface AuthContext {
     user?: User;
@@ -30,8 +30,8 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     const login = async (user: AuthUser) => {
-        const loginResponse = await firebase.login(user.email, user.password);
-        const firebaseUser = await firebase.getUserById(loginResponse.user.uid);
+        const loginResponse = await userService.login(user.email, user.password);
+        const firebaseUser = await userService.getUserById(loginResponse.user.uid);
         saveUserLocally(firebaseUser as User);
     }
 
