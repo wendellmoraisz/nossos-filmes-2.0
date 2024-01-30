@@ -1,4 +1,4 @@
-import { query, collection, where, getDocs, orderBy, addDoc, updateDoc, doc } from "firebase/firestore";
+import { query, collection, where, getDocs, orderBy, addDoc, updateDoc, doc, deleteDoc } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
 import Movie from "../@types/Movie";
 import { BASE_URL } from "../data/constants/theMoviesDb";
@@ -32,4 +32,11 @@ export async function updateMovie(movie: Movie) {
     await updateDoc(docRef, {
         ...movie
     });
+}
+
+export async function deleteMovie(movieId: number) {
+    const q = query(collection(db, "movies"), where("id", "==", movieId));
+    const res = await getDocs(q);
+    const movieRef  = res.docs[0].id;
+    return await deleteDoc(doc(db, "movies", movieRef));
 }
