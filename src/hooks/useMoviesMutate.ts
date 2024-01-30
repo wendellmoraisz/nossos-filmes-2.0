@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { addMovieToWatchList } from "../services/moviesService"
+import { addMovieToWatchList, updateMovie } from "../services/moviesService"
 import Movie from "../@types/Movie"
 
 const useMoviesMutate = (movie: Movie) => {
@@ -14,7 +14,16 @@ const useMoviesMutate = (movie: Movie) => {
         }
     });
 
-    return { addMovie };
+    const updateMovieData = useMutation({
+        mutationFn: updateMovie,
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ["movies", movie.watcher, movie.listCategory]
+            });
+        }
+    });
+
+    return { addMovie, updateMovieData };
 }
 
 export default useMoviesMutate;

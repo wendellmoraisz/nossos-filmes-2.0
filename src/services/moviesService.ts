@@ -1,4 +1,4 @@
-import { query, collection, where, getDocs, orderBy, addDoc } from "firebase/firestore";
+import { query, collection, where, getDocs, orderBy, addDoc, updateDoc, doc } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
 import Movie from "../@types/Movie";
 import { BASE_URL } from "../data/constants/theMoviesDb";
@@ -22,4 +22,14 @@ export async function searchMoviesByTitle(title: string) {
     const response = await fetch(searchMovieUrl);
     const data = await response.json();
     return data.results as Movie[];
+}
+
+export async function updateMovie(movie: Movie) {
+    const q = query(collection(db, "movies"), where("id", "==", movie.id));
+    const res = await getDocs(q);
+    const movieRef = res.docs[0].id;
+    const docRef = doc(db, "movies", movieRef);
+    await updateDoc(docRef, {
+        ...movie
+    });
 }
