@@ -2,6 +2,7 @@ import React from "react";
 import Movie from "../@types/Movie";
 import styled from "styled-components";
 import getEvaluationDescription from "../utils/getEvaluationDescription";
+import { MOVIE_POSTER_BASE_URL } from "../data/constants/theMoviesDb";
 
 const MovieCardContainer = styled.div`
     display: flex;
@@ -57,8 +58,8 @@ interface MovieCardProps {
 
 const MovieCard = ({ movie, buttons }: MovieCardProps) => {
     return (
-        <MovieCardContainer>
-            <MovieCardImage src={movie.poster_path} />
+        <MovieCardContainer key={movie.id}>
+            <MovieCardImage src={`${MOVIE_POSTER_BASE_URL}/${movie.poster_path}`} />
             <ButtonsContainer>
                 {buttons.map(button => (
                     <MovieCardButton onClick={() => button.onClickAction()}>
