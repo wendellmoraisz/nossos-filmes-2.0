@@ -4,7 +4,8 @@ import Movie from "../@types/Movie"
 
 const useMoviesMutate = (movie: Movie) => {
     const queryClient = useQueryClient();
-    const mutate = useMutation({
+
+    const addMovie = useMutation({
         mutationFn: addMovieToWatchList,
         onSuccess: () => {
             queryClient.invalidateQueries({
@@ -13,7 +14,7 @@ const useMoviesMutate = (movie: Movie) => {
         }
     });
 
-    return mutate;
+    return { addMovie };
 }
 
 export default useMoviesMutate;

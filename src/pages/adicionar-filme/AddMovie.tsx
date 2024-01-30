@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { searchMoviesByTitle } from "../../services/moviesService";
 import { ButtonsContainer, Container, MoviesCardsContainer } from "../../common/MoviesListStyled";
@@ -19,7 +19,7 @@ const AddMovie = () => {
     const { watcherId, listCategory } = useParams();
     const [openDialog, setOpenDialog] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
-    const { mutateAsync, isSuccess } = useMoviesMutate(selectedMovie as Movie);
+    const { addMovie } = useMoviesMutate(selectedMovie as Movie);
     const navigate = useNavigate();
 
     const handleAddMovie = async (movie: Movie) => {
@@ -31,7 +31,7 @@ const AddMovie = () => {
 
         try {
             toast.loading("Adicionando filme...", toastOptions);
-            mutateAsync(movie);
+            addMovie.mutateAsync(movie);
             toast.success("Filme adicionado com sucesso!", toastOptions);
             navigate(-1);
         } catch (error) {
@@ -58,7 +58,7 @@ const AddMovie = () => {
 
     useEffect(() => {
         handleCloseDialog();
-    }, [isSuccess]);
+    }, [addMovie.isSuccess]);
 
     const handleSearch = (search: string) => {
         searchMoviesByTitle(search)
