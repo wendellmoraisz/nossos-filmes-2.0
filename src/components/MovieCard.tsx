@@ -1,7 +1,7 @@
 import React from "react";
 import Movie from "../@types/Movie";
 import styled from "styled-components";
-import getEvaluationDescription from "../utils/getEvaluationDescription";
+import { getEvaluationDescription } from "../utils/evaluationUtils";
 import { MOVIE_POSTER_BASE_URL } from "../data/constants/theMoviesDb";
 
 const MovieCardContainer = styled.div`
