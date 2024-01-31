@@ -13,6 +13,7 @@ export default interface Movie {
     budget?: number
     revenue?: number
     watch_providers?: WatchProvider[]
+    watched: boolean
     evaluation?: number
     listCategory: string
     watcher: string

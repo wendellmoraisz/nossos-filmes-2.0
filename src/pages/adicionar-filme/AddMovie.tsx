@@ -25,6 +25,7 @@ const AddMovie = () => {
     const handleAddMovie = async (movie: Movie) => {
         movie.watcher = watcherId as string;
         movie.listCategory = listCategory as string;
+        movie.watched = false;
         const toastOptions = {
             id: "add-movie-toast"
         }
