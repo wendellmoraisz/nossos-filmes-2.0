@@ -37,7 +37,7 @@ export async function updateMovie(movie: Movie) {
 export async function deleteMovie(movieId: number) {
     const q = query(collection(db, "movies"), where("id", "==", movieId));
     const res = await getDocs(q);
-    const movieRef  = res.docs[0].id;
+    const movieRef = res.docs[0].id;
     return await deleteDoc(doc(db, "movies", movieRef));
 }
 
