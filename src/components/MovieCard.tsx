@@ -54,7 +54,7 @@ interface ButtonProps {
 
 interface MovieCardProps {
     movie: Movie
-    buttons: ButtonProps[]
+    buttons?: ButtonProps[]
 }
 
 const MovieCard = ({ movie, buttons }: MovieCardProps) => {
@@ -62,7 +62,7 @@ const MovieCard = ({ movie, buttons }: MovieCardProps) => {
         <MovieCardContainer key={movie.id}>
             <MovieCardImage src={`${MOVIE_POSTER_BASE_URL}/${movie.poster_path}`} />
             <ButtonsContainer>
-                {buttons.map((button, index) => (
+                {buttons?.map((button, index) => (
                     <Tooltip title={button.tooltipTitle}>
                         <MovieCardButton key={index} onClick={() => button.onClickAction()}>
                             {button.content}
