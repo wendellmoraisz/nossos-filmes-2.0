@@ -40,3 +40,13 @@ export async function deleteMovie(movieId: number) {
     const movieRef  = res.docs[0].id;
     return await deleteDoc(doc(db, "movies", movieRef));
 }
+
+export async function getUnwatchedMovies(watcherId: string, listCategory: string) {
+    const q = query(collection(db, "movies"),
+        where("watcher", "==", watcherId),
+        where("listCategory", "==", listCategory),
+        where("watched", "==", false)
+    );
+    const response = await getDocs(q);
+    return response.docs.map((doc) => doc.data()) as Movie[];
+}
