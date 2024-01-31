@@ -33,7 +33,7 @@ const ConfirmationDialog = ({ open, title, content, confirmAction, cancelAction 
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={cancelAction}>Não</Button>
-                    <Button onClick={confirmAction} autoFocus>
+                    <Button variant="contained" onClick={confirmAction} autoFocus>
                         Sim
                     </Button>
                 </DialogActions>
