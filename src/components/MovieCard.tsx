@@ -61,8 +61,8 @@ const MovieCard = ({ movie, buttons }: MovieCardProps) => {
         <MovieCardContainer key={movie.id}>
             <MovieCardImage src={`${MOVIE_POSTER_BASE_URL}/${movie.poster_path}`} />
             <ButtonsContainer>
-                {buttons.map(button => (
-                    <MovieCardButton onClick={() => button.onClickAction()}>
+                {buttons.map((button, index) => (
+                    <MovieCardButton key={index} onClick={() => button.onClickAction()}>
                         {button.content}
                     </MovieCardButton>
                 ))}
