@@ -1,8 +1,8 @@
-import React from "react";
 import Movie from "../@types/Movie";
 import styled from "styled-components";
 import { getEvaluationDescription } from "../utils/evaluationUtils";
 import { MOVIE_POSTER_BASE_URL } from "../data/constants/theMoviesDb";
+import { Tooltip } from "@mui/material";
 
 const MovieCardContainer = styled.div`
     display: flex;
@@ -49,6 +49,7 @@ const MovieCardTitle = styled.p`
 interface ButtonProps {
     content: string | JSX.Element
     onClickAction: () => void
+    tooltipTitle: string
 }
 
 interface MovieCardProps {
@@ -62,9 +63,11 @@ const MovieCard = ({ movie, buttons }: MovieCardProps) => {
             <MovieCardImage src={`${MOVIE_POSTER_BASE_URL}/${movie.poster_path}`} />
             <ButtonsContainer>
                 {buttons.map((button, index) => (
-                    <MovieCardButton key={index} onClick={() => button.onClickAction()}>
-                        {button.content}
-                    </MovieCardButton>
+                    <Tooltip title={button.tooltipTitle}>
+                        <MovieCardButton key={index} onClick={() => button.onClickAction()}>
+                            {button.content}
+                        </MovieCardButton>
+                    </Tooltip>
                 ))}
             </ButtonsContainer>
             <MovieCardTitle>{movie.title}</MovieCardTitle>

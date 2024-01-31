@@ -108,6 +108,7 @@ const AddMovie = () => {
                         {
                             content: <AddCircleIcon color="primary" sx={{ fontSize: "50px" }} />,
                             onClickAction: () => handleOPenDialog(movie),
+                            tooltipTitle: "Adicionar à lista"
                         }
                     ]
 
