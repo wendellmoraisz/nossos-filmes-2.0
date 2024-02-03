@@ -11,7 +11,7 @@ import { Typography } from "@mui/material";
 
 const style = {
     position: "absolute",
-    height: 400,
+    height: 480,
     width: { xs: "80%", sm: "50%", md: "33.33%", lg: "25%" },
     top: "50%",
     left: "50%",
@@ -24,7 +24,7 @@ const style = {
 };
 
 const StyledImage = styled.img`
-    max-width: 90%;
+    max-width: 100%;
     height: auto;
 `;
 
