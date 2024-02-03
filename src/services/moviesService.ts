@@ -18,8 +18,13 @@ export async function addMovieToWatchList(movie: Movie): Promise<void> {
 }
 
 export async function searchMoviesByTitle(title: string) {
-    const searchMovieUrl = `${BASE_URL}/search/movie?api_key=${import.meta.env.VITE_TMDB_API_KEY}&language=pt-BR&query=${title}&page=1`
-    const response = await fetch(searchMovieUrl);
+    const searchMovieUrl = `${BASE_URL}/search/movie?language=pt-BR&query=${title}&page=1`
+    const response = await fetch(searchMovieUrl, {
+        headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_BEARER_TOKER}`
+        }
+    });
     const data = await response.json();
     return data.results as Movie[];
 }
