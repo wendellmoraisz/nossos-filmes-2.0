@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login.tsx";
 import { createTheme, ThemeProvider } from "@mui/material";
 import AuthProvider from "./context/AuthProvider.tsx";
@@ -39,6 +39,7 @@ function App() {
       <AuthProvider>
         <BrowserRouter>
           <Routes>
+            <Route path="*" element={<Navigate to="/" />} />
             <Route path="/login" element={<Login />} />
             <Route element={<ProtectedRoute localUser={localUser} />}>
               <Route path="/" element={<Home />} />
