@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import Home from "./pages/home/Home.tsx";
 import MoviesToMe from "./pages/filmes-para-mim/MoviesToMe.tsx";
 import AddMovie from "./pages/adicionar-filme/AddMovie.tsx";
+import MyList from "./pages/minha-lista/MyList.tsx";
 
 const defautTheme = createTheme({
   palette: {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
   {
     path: "/filmes-para-mim",
     element: <MoviesToMe />
+  },
+  {
+    path: "/minha-lista",
+    element: <MyList />
   },
   {
     path: "/adicionar-filme/:watcherId/:listCategory",
