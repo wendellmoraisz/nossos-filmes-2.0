@@ -1,4 +1,3 @@
-import React from "react";
 import { Typography, Button, Avatar } from "@mui/material";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import useAuth from "../../hooks/useAuth";

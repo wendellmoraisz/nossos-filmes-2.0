@@ -1,4 +1,3 @@
-import React from "react";
 import { Container, CssBaseline, Box, Avatar, Typography, FormControl, TextField, Button, Grid } from "@mui/material";
 import Logo from "../assets/nossos-filmes-logo.png";
 import useAuth from "../hooks/useAuth";
