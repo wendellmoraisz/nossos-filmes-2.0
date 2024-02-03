@@ -4,6 +4,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import AuthProvider from "./context/AuthProvider.tsx";
 import { Toaster } from "react-hot-toast";
 import Home from "./pages/home/Home.tsx";
+import MoviesToMe from "./pages/filmes-para-mim/MoviesToMe.tsx";
 import AddMovie from "./pages/adicionar-filme/AddMovie.tsx";
 
 const defautTheme = createTheme({
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: <Home />
+  },
+  {
+    path: "/filmes-para-mim",
+    element: <MoviesToMe />
   },
   {
     path: "/adicionar-filme/:watcherId/:listCategory",

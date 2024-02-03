@@ -23,13 +23,9 @@ const ConfirmationDialog = ({ open, title, content, confirmAction, cancelAction 
                 open={open}
                 onClose={cancelAction}
             >
-                <DialogTitle>
-                    {title}
-                </DialogTitle>
+                <DialogTitle>{title}</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-                        {content}
-                    </DialogContentText>
+                    <DialogContentText>{content}</DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={cancelAction}>Não</Button>

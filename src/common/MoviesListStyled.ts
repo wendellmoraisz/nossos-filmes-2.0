@@ -9,7 +9,8 @@ export const Container = styled.main`
 
 export const ButtonsContainer = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 16px;
     padding: 32px 0;
 `;
