@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login.tsx";
 import { createTheme, ThemeProvider } from "@mui/material";
 import AuthProvider from "./context/AuthProvider.tsx";
@@ -10,6 +10,7 @@ import MyList from "./pages/minha-lista/MyList.tsx";
 import OurMovies from "./pages/nossos-filmes/OurMovies.tsx";
 import Recommendations from "./pages/indicacoes/Recommendations.tsx";
 import MovieDescription from "./pages/descricao-filme/MovieDescription.tsx";
+import ProtectedRoute from "./components/ProtectedRoute.tsx";
 
 const defautTheme = createTheme({
   palette: {
@@ -29,47 +30,28 @@ const defautTheme = createTheme({
   }
 });
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Login />
-  },
-  {
-    path: "/home",
-    element: <Home />
-  },
-  {
-    path: "/filmes-para-mim",
-    element: <MoviesToMe />
-  },
-  {
-    path: "/minha-lista",
-    element: <MyList />
-  },
-  {
-    path: "/nossos-filmes",
-    element: <OurMovies />
-  },
-  {
-    path: "/indicacoes",
-    element: <Recommendations />
-  },
-  {
-    path: "/adicionar-filme/:watcherId/:listCategory",
-    element: <AddMovie />
-  },
-  {
-    path: "/descricao-filme/:movieId",
-    element: <MovieDescription />
-  }
-]);
-
 function App() {
+
+  const localUser = JSON.parse(window.localStorage.getItem(import.meta.env.VITE_AUTH_STORAGE as string) as string);
 
   return (
     <ThemeProvider theme={defautTheme}>
       <AuthProvider>
-        <RouterProvider router={router} />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route element={<ProtectedRoute localUser={localUser} />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/filmes-para-mim" element={<MoviesToMe />} />
+              <Route path="/minha-lista" element={<MyList />} />
+              <Route path="/nossos-filmes" element={<OurMovies />} />
+              <Route path="/indicacoes" element={<Recommendations />} />
+              <Route path="/adicionar-filme/:watcherId/:listCategory" element={<AddMovie />} />
+              <Route path="/descricao-filme/:movieId" element={<MovieDescription />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
       </AuthProvider>
       <Toaster
         toastOptions={{
