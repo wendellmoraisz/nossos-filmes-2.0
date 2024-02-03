@@ -60,10 +60,7 @@ interface MovieCardProps {
 const MovieCard = ({ movie, buttons }: MovieCardProps) => {
     return (
         <MovieCardContainer key={movie.id}>
-            <MovieCardImage
-                src={`${MOVIE_POSTER_BASE_URL}${movie.poster_path}`}
-                alt={movie.title}
-            />
+            <MovieCardImage src={`${MOVIE_POSTER_BASE_URL}/${movie.poster_path}`} />
             <ButtonsContainer>
                 {buttons?.map((button, index) => (
                     <Tooltip title={button.tooltipTitle}>
