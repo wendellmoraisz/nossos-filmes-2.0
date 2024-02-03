@@ -1,6 +1,7 @@
 * {
   text-transform: none !important;
   font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
 }
 
 :root {

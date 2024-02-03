@@ -9,6 +9,7 @@ import AddMovie from "./pages/adicionar-filme/AddMovie.tsx";
 import MyList from "./pages/minha-lista/MyList.tsx";
 import OurMovies from "./pages/nossos-filmes/OurMovies.tsx";
 import Recommendations from "./pages/indicacoes/Recommendations.tsx";
+import MovieDescription from "./pages/descricao-filme/MovieDescription.tsx";
 
 const defautTheme = createTheme({
   palette: {
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
   {
     path: "/adicionar-filme/:watcherId/:listCategory",
     element: <AddMovie />
+  },
+  {
+    path: "/descricao-filme/:movieId",
+    element: <MovieDescription />
   }
 ]);
 

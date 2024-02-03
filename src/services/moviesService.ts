@@ -55,3 +55,25 @@ export async function getUnwatchedMovies(watcherId: string, listCategory: string
     const response = await getDocs(q);
     return response.docs.map((doc) => doc.data()) as Movie[];
 }
+
+export async function getMovieDetails(movieId: number) : Promise<Movie> {
+    const movieDetailsUrl = `${BASE_URL}/movie/${movieId}?language=pt-BR`
+    const response = await fetch(movieDetailsUrl, {
+        headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_BEARER_TOKEN}`
+        }
+    });
+    return await response.json();
+}
+
+export async function getMovieStreamingProviders(movieId: number) {
+    const movieWatchProvidersUrl = `${BASE_URL}/movie/${movieId}/watch/providers`
+    const response = await fetch(movieWatchProvidersUrl, {
+        headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_BEARER_TOKEN}`
+        }
+    });
+    return await response.json();
+}

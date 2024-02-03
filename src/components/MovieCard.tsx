@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { getEvaluationDescription } from "../utils/evaluationUtils";
 import { MOVIE_POSTER_BASE_URL } from "../data/constants/theMoviesDb";
 import { Tooltip } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const MovieCardContainer = styled.div`
     display: flex;
@@ -60,10 +61,12 @@ interface MovieCardProps {
 const MovieCard = ({ movie, buttons }: MovieCardProps) => {
     return (
         <MovieCardContainer key={movie.id}>
-            <MovieCardImage
-                src={`${MOVIE_POSTER_BASE_URL}${movie.poster_path}`}
-                alt={movie.title}
-            />
+            <Link to={`/descricao-filme/${movie.id}`}>
+                <MovieCardImage
+                    src={`${MOVIE_POSTER_BASE_URL}${movie.poster_path}`}
+                    alt={movie.title}
+                />
+            </Link>
             <ButtonsContainer>
                 {buttons?.map((button, index) => (
                     <Tooltip title={button.tooltipTitle}>
