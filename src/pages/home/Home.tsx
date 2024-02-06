@@ -26,6 +26,7 @@ const Home = () => {
                 <StyledLink to={"/minha-lista"}>Minha lista</StyledLink>
                 <StyledLink to={"/nossos-filmes"}>Nossos filmes</StyledLink>
                 <StyledLink to={"/indicacoes"}>{`Filmes para ${user?.pair.name}`}</StyledLink>
+                <StyledLink to={"/filmes-de"}>{`Filmes de ${user?.pair.name}`}</StyledLink>
                 <Button onClick={() => { logoutApp() }}>
                     <DirectionsRunIcon /> Sair
                 </Button>

@@ -11,6 +11,7 @@ import OurMovies from "./pages/nossos-filmes/OurMovies.tsx";
 import Recommendations from "./pages/indicacoes/Recommendations.tsx";
 import MovieDescription from "./pages/descricao-filme/MovieDescription.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
+import MoviesOf from "./pages/filmes-de/MoviesOf.tsx";
 
 const defautTheme = createTheme({
   palette: {
@@ -48,6 +49,7 @@ function App() {
               <Route path="/minha-lista" element={<MyList />} />
               <Route path="/nossos-filmes" element={<OurMovies />} />
               <Route path="/indicacoes" element={<Recommendations />} />
+              <Route path="/filmes-de" element={<MoviesOf />} />
               <Route path="/adicionar-filme/:watcherId/:listCategory" element={<AddMovie />} />
               <Route path="/descricao-filme/:movieId" element={<MovieDescription />} />
             </Route>
