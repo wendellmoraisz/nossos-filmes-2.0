@@ -25,7 +25,7 @@ const Recommendations = () => {
 
         try {
             toast.loading("Removendo filme...", toastOptions);
-            deleteMovieData.mutateAsync(movie.id);
+            deleteMovieData.mutateAsync(movie);
             toast.success("Filme excluído com sucesso!", toastOptions);
         } catch (error) {
             toast.error("Erro ao excluir filme", toastOptions);

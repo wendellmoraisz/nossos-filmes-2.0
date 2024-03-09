@@ -30,7 +30,11 @@ export async function searchMoviesByTitle(title: string) {
 }
 
 export async function updateMovie(movie: Movie) {
-    const q = query(collection(db, "movies"), where("id", "==", movie.id));
+    const q = query(collection(db, "movies"),
+        where("id", "==", movie.id),
+        where("watcher", "==", movie.watcher),
+        where("listCategory", "==", movie.listCategory)
+    );
     const res = await getDocs(q);
     const movieRef = res.docs[0].id;
     const docRef = doc(db, "movies", movieRef);
@@ -39,8 +43,12 @@ export async function updateMovie(movie: Movie) {
     });
 }
 
-export async function deleteMovie(movieId: number) {
-    const q = query(collection(db, "movies"), where("id", "==", movieId));
+export async function deleteMovie(movie: Movie) {
+    const q = query(collection(db, "movies"),
+        where("id", "==", movie.id),
+        where("watcher", "==", movie.watcher),
+        where("listCategory", "==", movie.listCategory)
+    );
     const res = await getDocs(q);
     const movieRef = res.docs[0].id;
     return await deleteDoc(doc(db, "movies", movieRef));
@@ -56,7 +64,7 @@ export async function getUnwatchedMovies(watcherId: string, listCategory: string
     return response.docs.map((doc) => doc.data()) as Movie[];
 }
 
-export async function getMovieDetails(movieId: number) : Promise<Movie> {
+export async function getMovieDetails(movieId: number): Promise<Movie> {
     const movieDetailsUrl = `${BASE_URL}/movie/${movieId}?language=pt-BR`
     const response = await fetch(movieDetailsUrl, {
         headers: {
