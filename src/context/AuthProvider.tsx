@@ -5,13 +5,11 @@ import * as userService from "../services/userService";
 
 interface AuthContext {
     user?: User;
-    setUser: (user: User) => void;
     logout: () => void;
     login: (user: AuthUser) => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContext>({
-    setUser: () => { },
     logout: () => { },
     login: async () => { },
 });
@@ -44,7 +42,6 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
     const contextValues = {
         user,
-        setUser: saveUserLocally,
         logout: logout,
         login: login,
     };
