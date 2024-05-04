@@ -4,6 +4,8 @@ import { getEvaluationDescription } from "../utils/evaluationUtils";
 import { MOVIE_POSTER_BASE_URL } from "../data/constants/theMoviesDb";
 import { Tooltip } from "@mui/material";
 import { Link } from "react-router-dom";
+import { Suspense } from "react";
+import Loading from "./Loading";
 
 const MovieCardContainer = styled.div`
     display: flex;
@@ -62,10 +64,12 @@ const MovieCard = ({ movie, buttons }: MovieCardProps) => {
     return (
         <MovieCardContainer key={movie.id}>
             <Link to={`/descricao-filme/${movie.id}`}>
-                <MovieCardImage
-                    src={`${MOVIE_POSTER_BASE_URL}${movie.poster_path}`}
-                    alt={movie.title}
-                />
+                <Suspense fallback={<Loading />}>
+                    <MovieCardImage
+                        src={`${MOVIE_POSTER_BASE_URL}${movie.poster_path}`}
+                        alt={movie.title}
+                    />
+                </Suspense>
             </Link>
             <ButtonsContainer>
                 {buttons?.map((button, index) => (
