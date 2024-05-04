@@ -14,6 +14,7 @@ import { convertMinutesToHours } from "../../utils/convertMinutesToHours";
 import { abbreviateNumber } from "../../utils/abbreviateNumber";
 import Loading from "../../components/Loading";
 import { Container, MovieBanner, MovieInfosContainer, MovieHeaderContainer, MoviePoster, MovieHeadInfo, MovieTitle, MovieTagline, MovieAdittionalInfoContainer, MovieAdittionalInfoItem, CategoryTitle, MovieGenresContainer, WatchProvidersContainer, WatchProviderLogo } from "./MovieDescriptionStyled";
+import utorrentLogo from "../../assets/utorrent-logo.png";
 
 const MovieDescription = () => {
 
@@ -87,10 +88,9 @@ const MovieDescription = () => {
                         </MovieGenresContainer>
                     </>
                 }
+                <CategoryTitle>Onde assistir</CategoryTitle>
                 {
-                    (movieDetails?.watch_providers?.length ?? 0) > 0 &&
-                    <>
-                        <CategoryTitle>Onde assistir</CategoryTitle>
+                    (movieDetails?.watch_providers?.length ?? 0) > 0 ?
                         <MovieGenresContainer>
                             {movieDetails?.watch_providers?.map(provider => (
                                 <WatchProvidersContainer>
@@ -100,7 +100,12 @@ const MovieDescription = () => {
                                 </WatchProvidersContainer>
                             ))}
                         </MovieGenresContainer>
-                    </>
+                        :
+                        <WatchProvidersContainer>
+                            <a target="_blank" href={`https://www.google.com/search?q=${movieDetails.title}+download+torrent`}>
+                                <WatchProviderLogo src={utorrentLogo} alt="Utorrent logo"></WatchProviderLogo>
+                            </a>
+                        </WatchProvidersContainer>
                 }
                 <Accordion sx={{ marginTop: "30px", backgroundColor: "#242A32", border: "none" }}>
                     <AccordionSummary
