@@ -88,24 +88,29 @@ const MovieDescription = () => {
                         </MovieGenresContainer>
                     </>
                 }
-                <CategoryTitle>Onde assistir</CategoryTitle>
                 {
-                    (movieDetails?.watch_providers?.length ?? 0) > 0 ?
-                        <MovieGenresContainer>
-                            {movieDetails?.watch_providers?.map(provider => (
+                    movieDetails.release_date < new Date().toISOString() &&
+                    <>
+                        <CategoryTitle>Onde assistir</CategoryTitle>
+                        {
+                            (movieDetails?.watch_providers?.length ?? 0) > 0 ?
+                                <MovieGenresContainer>
+                                    {movieDetails?.watch_providers?.map(provider => (
+                                        <WatchProvidersContainer>
+                                            <a target="_blank" href={`https://themoviedb.org/movie/${movieId}/watch`}>
+                                                <WatchProviderLogo src={`${MOVIE_POSTER_BASE_URL}${provider.logo_path}`} alt={provider.provider_name} />
+                                            </a>
+                                        </WatchProvidersContainer>
+                                    ))}
+                                </MovieGenresContainer>
+                                :
                                 <WatchProvidersContainer>
-                                    <a target="_blank" href={`https://themoviedb.org/movie/${movieId}/watch`}>
-                                        <WatchProviderLogo src={`${MOVIE_POSTER_BASE_URL}${provider.logo_path}`} alt={provider.provider_name} />
+                                    <a target="_blank" href={`https://www.google.com/search?q=${movieDetails.title}+download+torrent`}>
+                                        <WatchProviderLogo src={utorrentLogo} alt="Utorrent logo"></WatchProviderLogo>
                                     </a>
                                 </WatchProvidersContainer>
-                            ))}
-                        </MovieGenresContainer>
-                        :
-                        <WatchProvidersContainer>
-                            <a target="_blank" href={`https://www.google.com/search?q=${movieDetails.title}+download+torrent`}>
-                                <WatchProviderLogo src={utorrentLogo} alt="Utorrent logo"></WatchProviderLogo>
-                            </a>
-                        </WatchProvidersContainer>
+                        }
+                    </>
                 }
                 <Accordion sx={{ marginTop: "30px", backgroundColor: "#242A32", border: "none" }}>
                     <AccordionSummary
