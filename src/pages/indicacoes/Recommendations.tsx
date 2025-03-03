@@ -4,7 +4,7 @@ import MovieCard from "../../components/MovieCard";
 import useMoviesData from "../../hooks/useMoviesData";
 import useAuth from "../../hooks/useAuth";
 import Loading from "../../components/Loading";
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import CancelOutilined from '@mui/icons-material/CancelOutlined';
 import AddMovieButton from "../../components/AddMovieButton";
 import useMoviesMutate from "../../hooks/useMoviesMutate";
 import { useState } from "react";
@@ -56,7 +56,7 @@ const Recommendations = () => {
 
                     const cardButtons = [
                         {
-                            content: <HighlightOffIcon color="error" sx={{ fontSize: "50px" }} />,
+                            content: <CancelOutilined color="error" sx={{ fontSize: "40px" }} />,
                             onClickAction: () => handleOPenDialog(movie),
                             tooltipTitle: "Excluir"
                         }

@@ -1,10 +1,10 @@
 import { ButtonsContainer, Container, MoviesCardsContainer } from "../../common/MoviesListStyled";
 import HomeButton from "../../components/HomeButton";
 import MovieCard from "../../components/MovieCard";
-import ThumbsUpDownIcon from '@mui/icons-material/ThumbsUpDown';
+import ThumbsUpDownOutlinedOutlinedIcon from '@mui/icons-material/ThumbsUpDownOutlined';
 import useMoviesData from "../../hooks/useMoviesData";
 import Loading from "../../components/Loading";
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import CancelOutilined from '@mui/icons-material/CancelOutlined';
 import AddMovieButton from "../../components/AddMovieButton";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -93,12 +93,12 @@ const OurMovies = () => {
                 {data?.map(movie => {
                     const cardButtons = [
                         {
-                            content: <HighlightOffIcon color="error" sx={{ fontSize: "50px" }} />,
+                            content: <CancelOutilined color="error" sx={{ fontSize: "40px" }} />,
                             onClickAction: () => handleOPenDeleteDialog(movie),
                             tooltipTitle: "Excluir"
                         },
                         {
-                            content: <ThumbsUpDownIcon color="primary" sx={{ fontSize: "50px" }} />,
+                            content: <ThumbsUpDownOutlinedOutlinedIcon color="primary" sx={{ fontSize: "40px" }} />,
                             onClickAction: () => handleOPenEvaluationDialog(movie),
                             tooltipTitle: "Avaliar"
                         }
