@@ -11,7 +11,7 @@ export function abbreviateNumber(value: number) {
     return abbreviation(1000000000, "B");
 
     function abbreviation(divisor: number, suffix: string) {
-        const toFixedFraction = value % divisor === 0 ? 0 : 1;
-        return `${(value / divisor).toFixed(toFixedFraction)}${suffix}`;
+        const fractionDigits = Number.isInteger(value / divisor) ? 0 : 1;
+        return `${parseFloat((value / divisor).toFixed(fractionDigits))}${suffix}`;
     }
 }
