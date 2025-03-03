@@ -13,7 +13,7 @@ import { getYearFromReleaseDate } from "../../utils/getYearFromReleaseDate";
 import { convertMinutesToHours } from "../../utils/convertMinutesToHours";
 import { abbreviateNumber } from "../../utils/abbreviateNumber";
 import Loading from "../../components/Loading";
-import { Container, MovieBanner, MovieInfosContainer, MovieHeaderContainer, MoviePoster, MovieHeadInfo, MovieTitle, MovieTagline, MovieAdittionalInfoContainer, MovieAdittionalInfoItem, CategoryTitle, MovieGenresContainer, WatchProvidersContainer, WatchProviderLogo } from "./MovieDescriptionStyled";
+import { Container, MovieBanner, MovieInfosContainer, MovieHeaderContainer, MoviePoster, MovieHeadInfo, MovieTitle, MovieTagline, MovieAdittionalInfoContainer, MovieAdittionalInfoItem, CategoryTitle, MovieGenresContainer, WatchProvidersContainer, WatchProviderLogo, MovieBannerContainer } from "./MovieDescriptionStyled";
 import utorrentLogo from "../../assets/utorrent-logo.png";
 
 const MovieDescription = () => {
@@ -35,7 +35,9 @@ const MovieDescription = () => {
 
     return (
         <Container>
-            <MovieBanner src={`${MOVIE_POSTER_BASE_URL}${movieDetails?.backdrop_path}`} alt={movieDetails?.title} />
+            <MovieBannerContainer>
+                <MovieBanner $imageUrl={`${MOVIE_POSTER_BASE_URL}${movieDetails?.backdrop_path}`} />
+            </MovieBannerContainer>
             <MovieInfosContainer>
                 <MovieHeaderContainer>
                     <MoviePoster src={`${MOVIE_POSTER_BASE_URL}${movieDetails?.poster_path}`} alt={movieDetails?.title} />

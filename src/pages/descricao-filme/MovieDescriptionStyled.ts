@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+    width: 100%;
+    padding: 0 200px 0 200px;
+
+    @media (max-width: 1100px) {
+        padding: 0;
+    }
 `;
 
 export const MovieInfosContainer = styled.div`
@@ -11,14 +17,30 @@ export const MovieInfosContainer = styled.div`
     }
 `;
 
-export const MovieBanner = styled.img`
-    width: 100%;
-    max-height: 300px;
-    object-fit: cover;
+export const MovieBannerContainer = styled.div`
+  margin-top: 0;
+  height: 55vh;
+  width: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.5);
 
-    @media (max-width: 600px) {
-        max-height: 400px;
+  @media (min-width: 1100px) {
+    margin-top: 20px;
+  }
+
+  @media (max-width: 600px) {
+        max-height: 200px;
     }
+`;
+
+export const MovieBanner = styled.div<{ $imageUrl: string }>`
+    position: relative;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    background-image: url(${props => props.$imageUrl});
+    background-size: cover;
+    background-position: center;
 `;
 
 export const MovieHeaderContainer = styled.div`
@@ -27,13 +49,18 @@ export const MovieHeaderContainer = styled.div`
 `;
 
 export const MoviePoster = styled.img`
-    width: 200px;
-    height: 300px;
+    width: 250px;
+    height: 350px;
     object-fit: cover;
-    margin-top: -150px;
+    margin-top: -241.5px;
+
+    @media (max-width: 850px) {
+        width: 200px;
+        height: 300px;
+    }
 
     @media (max-width: 600px) {
-        width: 150px;
+        width: 133.5px;
         height: 200px;
         margin-top: -100px;
     }
