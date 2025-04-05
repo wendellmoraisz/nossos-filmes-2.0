@@ -13,7 +13,8 @@ import { getYearFromReleaseDate } from "../../utils/getYearFromReleaseDate";
 import { convertMinutesToHours } from "../../utils/convertMinutesToHours";
 import { abbreviateNumber } from "../../utils/abbreviateNumber";
 import Loading from "../../components/Loading";
-import { Container, MovieBanner, MovieInfosContainer, MovieHeaderContainer, MoviePoster, MovieHeadInfo, MovieTitle, MovieTagline, MovieAdittionalInfoContainer, MovieAdittionalInfoItem, CategoryTitle, MovieGenresContainer, WatchProvidersContainer, WatchProviderLogo } from "./MovieDescriptionStyled";
+import { Container, MovieBanner, MovieInfosContainer, MovieHeaderContainer, MoviePoster, MovieHeadInfo, MovieTitle, MovieTagline, MovieAdittionalInfoContainer, MovieAdittionalInfoItem, CategoryTitle, MovieGenresContainer, WatchProvidersContainer, WatchProviderLogo, MovieBannerContainer } from "./MovieDescriptionStyled";
+import utorrentLogo from "../../assets/utorrent-logo.png";
 
 const MovieDescription = () => {
 
@@ -34,7 +35,9 @@ const MovieDescription = () => {
 
     return (
         <Container>
-            <MovieBanner src={`${MOVIE_POSTER_BASE_URL}${movieDetails?.backdrop_path}`} alt={movieDetails?.title} />
+            <MovieBannerContainer>
+                <MovieBanner $imageUrl={`${MOVIE_POSTER_BASE_URL}${movieDetails?.backdrop_path}`} />
+            </MovieBannerContainer>
             <MovieInfosContainer>
                 <MovieHeaderContainer>
                     <MoviePoster src={`${MOVIE_POSTER_BASE_URL}${movieDetails?.poster_path}`} alt={movieDetails?.title} />
@@ -88,18 +91,27 @@ const MovieDescription = () => {
                     </>
                 }
                 {
-                    (movieDetails?.watch_providers?.length ?? 0) > 0 &&
+                    movieDetails.release_date < new Date().toISOString() &&
                     <>
                         <CategoryTitle>Onde assistir</CategoryTitle>
-                        <MovieGenresContainer>
-                            {movieDetails?.watch_providers?.map(provider => (
+                        {
+                            (movieDetails?.watch_providers?.length ?? 0) > 0 ?
+                                <MovieGenresContainer>
+                                    {movieDetails?.watch_providers?.map(provider => (
+                                        <WatchProvidersContainer>
+                                            <a target="_blank" href={`https://themoviedb.org/movie/${movieId}/watch`}>
+                                                <WatchProviderLogo src={`${MOVIE_POSTER_BASE_URL}${provider.logo_path}`} alt={provider.provider_name} />
+                                            </a>
+                                        </WatchProvidersContainer>
+                                    ))}
+                                </MovieGenresContainer>
+                                :
                                 <WatchProvidersContainer>
-                                    <a target="_blank" href={`https://themoviedb.org/movie/${movieId}/watch`}>
-                                        <WatchProviderLogo src={`${MOVIE_POSTER_BASE_URL}${provider.logo_path}`} alt={provider.provider_name} />
+                                    <a target="_blank" href={`https://www.google.com/search?q=${movieDetails.title}+download+torrent`}>
+                                        <WatchProviderLogo src={utorrentLogo} alt="Utorrent logo"></WatchProviderLogo>
                                     </a>
                                 </WatchProvidersContainer>
-                            ))}
-                        </MovieGenresContainer>
+                        }
                     </>
                 }
                 <Accordion sx={{ marginTop: "30px", backgroundColor: "#242A32", border: "none" }}>

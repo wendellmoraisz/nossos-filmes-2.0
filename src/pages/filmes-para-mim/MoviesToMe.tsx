@@ -1,7 +1,7 @@
 import { ButtonsContainer, MoviesCardsContainer, Container } from "../../common/MoviesListStyled";
 import HomeButton from "../../components/HomeButton";
 import MovieCard from "../../components/MovieCard";
-import ThumbsUpDownIcon from '@mui/icons-material/ThumbsUpDown';
+import ThumbsUpDownOutlinedOutlinedIcon from '@mui/icons-material/ThumbsUpDownOutlined';
 import useMoviesData from "../../hooks/useMoviesData";
 import useAuth from "../../hooks/useAuth";
 import Loading from "../../components/Loading";
@@ -67,7 +67,7 @@ const MoviesToMe = () => {
                 {data?.map(movie => {
                     const cardButtons = [
                         {
-                            content: <ThumbsUpDownIcon color="primary" sx={{ fontSize: "50px" }} />,
+                            content: <ThumbsUpDownOutlinedOutlinedIcon color="primary" sx={{ fontSize: "40px" }} />,
                             onClickAction: () => handleOPenEvaluationDialog(movie),
                             tooltipTitle: "Avaliar"
                         }

@@ -63,6 +63,12 @@ function App() {
             background: "#242A32",
             color: "#FFF",
             boxShadow: "1px 5px 14px 1px rgba(0, 0, 0, 0.2)"
+          },
+          success: {
+            iconTheme: {
+              primary: "#32E0C4",
+              secondary: "#242A32"
+            }
           }
         }}
       />
