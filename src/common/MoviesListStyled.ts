@@ -24,6 +24,6 @@ export const MoviesCardsContainer = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     gap: 40px;
-    max-width: 1800px;
+    max-width: 80%;
     margin-top: 150px;
 `;
