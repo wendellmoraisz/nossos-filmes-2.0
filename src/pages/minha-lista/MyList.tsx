@@ -95,12 +95,12 @@ const MyList = () => {
                 {data?.map(movie => {
                     const cardButtons = [
                         {
-                            content: <CancelOutilined color="error" sx={{ fontSize: "40px" }} />,
+                            content: <CancelOutilined color="error" sx={{ fontSize: { xs: "18px", md: "40px" } }} />,
                             onClickAction: () => handleOPenDeleteDialog(movie),
                             tooltipTitle: "Excluir"
                         },
                         {
-                            content: <ThumbsUpDownOutlinedOutlinedIcon color="primary" sx={{ fontSize: "40px" }} />,
+                            content: <ThumbsUpDownOutlinedOutlinedIcon color="primary" sx={{ fontSize: { xs: "18px", md: "40px" } }} />,
                             onClickAction: () => handleOPenEvaluationDialog(movie),
                             tooltipTitle: "Avaliar"
                         }
