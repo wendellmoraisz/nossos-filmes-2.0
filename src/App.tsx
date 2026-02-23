@@ -17,23 +17,26 @@ const defautTheme = createTheme({
   palette: {
     mode: "dark",
     background: {
-      default: "#242A32"
+      default: "#242A32",
     },
     primary: {
-      main: "#32E0C4"
+      main: "#32E0C4",
     },
     secondary: {
-      main: "#242A32"
-    }
+      main: "#242A32",
+    },
   },
   typography: {
-    fontFamily: "Poppins"
-  }
+    fontFamily: "Poppins",
+  },
 });
 
 function App() {
-
-  const localUser = JSON.parse(window.localStorage.getItem(import.meta.env.VITE_AUTH_STORAGE as string) as string);
+  const localUser = JSON.parse(
+    window.localStorage.getItem(
+      import.meta.env.VITE_AUTH_STORAGE as string,
+    ) as string,
+  );
 
   return (
     <ThemeProvider theme={defautTheme}>
@@ -50,8 +53,14 @@ function App() {
               <Route path="/nossos-filmes" element={<OurMovies />} />
               <Route path="/indicacoes" element={<Recommendations />} />
               <Route path="/filmes-de" element={<MoviesOf />} />
-              <Route path="/adicionar-filme/:watcherId/:listCategory" element={<AddMovie />} />
-              <Route path="/descricao-filme/:movieId" element={<MovieDescription />} />
+              <Route
+                path="/adicionar-filme/:watcherId/:listCategory"
+                element={<AddMovie />}
+              />
+              <Route
+                path="/descricao-filme/:movieId"
+                element={<MovieDescription />}
+              />
             </Route>
           </Routes>
         </BrowserRouter>
@@ -62,18 +71,18 @@ function App() {
           style: {
             background: "#242A32",
             color: "#FFF",
-            boxShadow: "1px 5px 14px 1px rgba(0, 0, 0, 0.2)"
+            boxShadow: "1px 5px 14px 1px rgba(0, 0, 0, 0.2)",
           },
           success: {
             iconTheme: {
               primary: "#32E0C4",
-              secondary: "#242A32"
-            }
-          }
+              secondary: "#242A32",
+            },
+          },
         }}
       />
     </ThemeProvider>
-  )
+  );
 }
 
 export default App;

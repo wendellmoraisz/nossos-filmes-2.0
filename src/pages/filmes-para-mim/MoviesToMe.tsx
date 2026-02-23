@@ -1,7 +1,11 @@
-import { ButtonsContainer, MoviesCardsContainer, Container } from "../../common/MoviesListStyled";
+import {
+  ButtonsContainer,
+  MoviesCardsContainer,
+  Container,
+} from "../../common/MoviesListStyled";
 import HomeButton from "../../components/HomeButton";
 import MovieCard from "../../components/MovieCard";
-import ThumbsUpDownOutlinedOutlinedIcon from '@mui/icons-material/ThumbsUpDownOutlined';
+import ThumbsUpDownOutlinedOutlinedIcon from "@mui/icons-material/ThumbsUpDownOutlined";
 import useMoviesData from "../../hooks/useMoviesData";
 import useAuth from "../../hooks/useAuth";
 import Loading from "../../components/Loading";
@@ -9,87 +13,109 @@ import OptionsDialog from "../../components/OptionsDialog";
 import { useState } from "react";
 import Movie from "../../@types/Movie";
 import evaluations from "../../data/constants/evaluations";
-import { getEvaluationDescription, getEvaluationValue } from "../../utils/evaluationUtils";
+import {
+  getEvaluationDescription,
+  getEvaluationValue,
+} from "../../utils/evaluationUtils";
 import useMoviesMutate from "../../hooks/useMoviesMutate";
 import toast from "react-hot-toast";
 import ChoseForMeButton from "../../components/ChoseForMeButton";
+import FilterWatchedButton from "../../components/FilterWatchedButton";
+import useFilteredMovies from "../../hooks/useFilteredMovies";
 
 const MoviesToMe = () => {
+  const [openEvaluationDialog, setOpenEvaluationDialog] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+  const { user } = useAuth();
+  const { data, isLoading } = useMoviesData(
+    user?.id as string,
+    "recommendation",
+  );
+  const { filteredMovies, showUnwatchedOnly, toggleFilter } =
+    useFilteredMovies(data);
+  const { updateMovieData } = useMoviesMutate(selectedMovie as Movie);
 
-    const [openEvaluationDialog, setOpenEvaluationDialog] = useState(false);
-    const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
-    const { user } = useAuth();
-    const { data, isLoading } = useMoviesData(user?.id as string, "recommendation");
-    const { updateMovieData } = useMoviesMutate(selectedMovie as Movie);
+  const handleOPenEvaluationDialog = (movie: Movie) => {
+    setSelectedMovie(movie);
+    setOpenEvaluationDialog(true);
+  };
 
-    const handleOPenEvaluationDialog = (movie: Movie) => {
-        setSelectedMovie(movie);
-        setOpenEvaluationDialog(true);
+  const handleCloseDialog = () => {
+    setOpenEvaluationDialog(false);
+  };
+
+  const handleConfirmEvaluation = (selectedValue?: number | string) => {
+    const toastOptions = { id: "evaluate-movie-toast" };
+    const selectedEvaluationValue = getEvaluationValue(selectedValue as string);
+    const updatedMovie = {
+      ...selectedMovie,
+      evaluation: selectedEvaluationValue,
+      watched: true,
+    } as Movie;
+
+    try {
+      toast.loading("Avaliando filme...", toastOptions);
+      updateMovieData.mutate(updatedMovie);
+      toast.success("Filme avaliado com sucesso!", toastOptions);
+    } catch (error) {
+      toast.error("Erro ao avaliar filme", toastOptions);
     }
 
-    const handleCloseDialog = () => {
-        setOpenEvaluationDialog(false);
-    }
+    handleCloseDialog();
+  };
 
-    const handleConfirmEvaluation = (selectedValue?: number | string) => {
-        const toastOptions = { id: "evaluate-movie-toast" };
-        const selectedEvaluationValue = getEvaluationValue(selectedValue as string);
-        const updatedMovie = {
-            ...selectedMovie,
-            evaluation: selectedEvaluationValue,
-            watched: true
-        } as Movie;
+  if (isLoading) return <Loading />;
 
-        try {
-            toast.loading("Avaliando filme...", toastOptions);
-            updateMovieData.mutate(updatedMovie);
-            toast.success("Filme avaliado com sucesso!", toastOptions);
-        } catch (error) {
-            toast.error("Erro ao avaliar filme", toastOptions);
-        }
-
-        handleCloseDialog();
-    }
-
-    if (isLoading) return <Loading />;
-
-    return (
-        <Container>
-            <ButtonsContainer>
-                <HomeButton />
-                <ChoseForMeButton
-                    label="Escolha por mim"
-                    watcherId={user?.id as string}
-                    listCategory="recommendation"
+  return (
+    <Container>
+      <ButtonsContainer>
+        <HomeButton />
+        <ChoseForMeButton
+          label="Escolha por mim"
+          watcherId={user?.id as string}
+          listCategory="recommendation"
+        />
+        <FilterWatchedButton
+          isActive={showUnwatchedOnly}
+          onClick={toggleFilter}
+        />
+      </ButtonsContainer>
+      <MoviesCardsContainer>
+        {filteredMovies?.map((movie) => {
+          const cardButtons = [
+            {
+              content: (
+                <ThumbsUpDownOutlinedOutlinedIcon
+                  color="primary"
+                  sx={{ fontSize: "40px" }}
                 />
-            </ButtonsContainer>
-            <MoviesCardsContainer>
-                {data?.map(movie => {
-                    const cardButtons = [
-                        {
-                            content: <ThumbsUpDownOutlinedOutlinedIcon color="primary" sx={{ fontSize: "40px" }} />,
-                            onClickAction: () => handleOPenEvaluationDialog(movie),
-                            tooltipTitle: "Avaliar"
-                        }
-                    ]
+              ),
+              onClickAction: () => handleOPenEvaluationDialog(movie),
+              tooltipTitle: "Avaliar",
+            },
+          ];
 
-                    return (
-                        <MovieCard key={movie.id} movie={movie} buttons={cardButtons} />
-                    )
-                })}
-            </MoviesCardsContainer>
-            {openEvaluationDialog && selectedMovie && (
-                <OptionsDialog
-                    open={openEvaluationDialog}
-                    title={`Avalie ${selectedMovie.title}`}
-                    options={evaluations.map(evaluation => evaluation.description)}
-                    value={selectedMovie.evaluation ? getEvaluationDescription(selectedMovie.evaluation) : ""}
-                    confirmAction={handleConfirmEvaluation}
-                    cancelAction={handleCloseDialog}
-                />
-            )}
-        </Container>
-    )
-}
+          return (
+            <MovieCard key={movie.id} movie={movie} buttons={cardButtons} />
+          );
+        })}
+      </MoviesCardsContainer>
+      {openEvaluationDialog && selectedMovie && (
+        <OptionsDialog
+          open={openEvaluationDialog}
+          title={`Avalie ${selectedMovie.title}`}
+          options={evaluations.map((evaluation) => evaluation.description)}
+          value={
+            selectedMovie.evaluation
+              ? getEvaluationDescription(selectedMovie.evaluation)
+              : ""
+          }
+          confirmAction={handleConfirmEvaluation}
+          cancelAction={handleCloseDialog}
+        />
+      )}
+    </Container>
+  );
+};
 
 export default MoviesToMe;
