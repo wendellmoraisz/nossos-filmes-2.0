@@ -32,7 +32,7 @@ export const MoviesCardsContainer = styled.div`
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
     max-width: 95%;
-    margin-top: 160px;
+    margin-top: 100px;
     padding: 0 4px;
   }
 `;
