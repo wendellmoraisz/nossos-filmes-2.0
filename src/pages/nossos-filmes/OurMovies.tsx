@@ -22,9 +22,13 @@ import {
 } from "../../utils/evaluationUtils";
 import ConfirmationDialog from "../../components/ConfirmationDialog";
 import ChoseForMeButton from "../../components/ChoseForMeButton";
+import FilterWatchedButton from "../../components/FilterWatchedButton";
+import useFilteredMovies from "../../hooks/useFilteredMovies";
 
 const OurMovies = () => {
   const { data, isLoading } = useMoviesData("we", "pair-list");
+  const { filteredMovies, showUnwatchedOnly, toggleFilter } =
+    useFilteredMovies(data);
   const [openEvaluationDialog, setOpenEvaluationDialog] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
@@ -98,9 +102,13 @@ const OurMovies = () => {
           watcherId="we"
           listCategory="pair-list"
         />
+        <FilterWatchedButton
+          isActive={showUnwatchedOnly}
+          onClick={toggleFilter}
+        />
       </ButtonsContainer>
       <MoviesCardsContainer>
-        {data?.map((movie) => {
+        {filteredMovies?.map((movie) => {
           const cardButtons = [
             {
               content: (

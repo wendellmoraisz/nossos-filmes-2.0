@@ -20,6 +20,8 @@ import {
 import useMoviesMutate from "../../hooks/useMoviesMutate";
 import toast from "react-hot-toast";
 import ChoseForMeButton from "../../components/ChoseForMeButton";
+import FilterWatchedButton from "../../components/FilterWatchedButton";
+import useFilteredMovies from "../../hooks/useFilteredMovies";
 
 const MoviesToMe = () => {
   const [openEvaluationDialog, setOpenEvaluationDialog] = useState(false);
@@ -29,6 +31,8 @@ const MoviesToMe = () => {
     user?.id as string,
     "recommendation",
   );
+  const { filteredMovies, showUnwatchedOnly, toggleFilter } =
+    useFilteredMovies(data);
   const { updateMovieData } = useMoviesMutate(selectedMovie as Movie);
 
   const handleOPenEvaluationDialog = (movie: Movie) => {
@@ -71,9 +75,13 @@ const MoviesToMe = () => {
           watcherId={user?.id as string}
           listCategory="recommendation"
         />
+        <FilterWatchedButton
+          isActive={showUnwatchedOnly}
+          onClick={toggleFilter}
+        />
       </ButtonsContainer>
       <MoviesCardsContainer>
-        {data?.map((movie) => {
+        {filteredMovies?.map((movie) => {
           const cardButtons = [
             {
               content: (
