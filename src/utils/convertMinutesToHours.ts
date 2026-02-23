@@ -5,6 +5,6 @@ export function convertMinutesToHours(minutes: number) {
   const remainingMinutes = minutes % 60;
 
   if (remainingMinutes === 0) return `${hours}h`;
-  
+
   return `${hours}h ${remainingMinutes}min`;
 }
