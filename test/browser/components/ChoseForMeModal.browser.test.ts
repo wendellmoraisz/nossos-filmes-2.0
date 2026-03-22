@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
 import { useState } from "react";
-import ChoseForMeModal from "../../src/components/ChoseForMeModal";
-import { createMoviesFixture } from "../fixtures/movie.fixture";
+import ChoseForMeModal from "@/components/ChoseForMeModal";
+import { createMoviesFixture } from "@test/fixtures/movie.fixture";
 
 vi.mock("react", async (importOriginal) => {
   const actual = await importOriginal<typeof import("react")>();
@@ -12,7 +12,7 @@ vi.mock("react", async (importOriginal) => {
   };
 });
 
-vi.mock("../../src/services/moviesService", () => ({
+vi.mock("@/services/moviesService", () => ({
   getUnwatchedMovies: vi.fn(),
 }));
 
@@ -31,7 +31,7 @@ vi.mock("@mui/material/Typography", () => ({
     props: { children },
   })),
 }));
-vi.mock("./MovieCard", () => ({ default: () => "MovieCard" }));
+vi.mock("@/components/MovieCard", () => ({ default: () => "MovieCard" }));
 
 describe("ChoseForMeModal", () => {
   const props = {

@@ -1,8 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { useState, useMemo } from "react";
-import useFilteredMovies from "../../src/hooks/useFilteredMovies";
-import Movie from "../../src/@types/Movie";
-import { createMoviesFixture } from "../fixtures/movie.fixture";
+import useFilteredMovies from "@/hooks/useFilteredMovies";
+import Movie from "@/@types/Movie";
+import { createMoviesFixture } from "../../fixtures/movie.fixture";
 
 vi.mock("react", async (importOriginal) => {
   const actual = await importOriginal<typeof import("react")>();

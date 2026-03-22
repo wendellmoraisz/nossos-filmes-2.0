@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { abbreviateNumber } from "../../src/utils/abbreviateNumber";
+import { abbreviateNumber } from "@/utils/abbreviateNumber";
 
 describe("abbreviateNumber", () => {
   describe("values below 1000", () => {

@@ -16,8 +16,8 @@ import {
   getUnwatchedMovies,
   getMovieDetails,
   getMovieStreamingProviders,
-} from "../../src/services/moviesService";
-import { createMovieFixture } from "../fixtures/movie.fixture";
+} from "@/services/moviesService";
+import { createMovieFixture } from "../../fixtures/movie.fixture";
 
 // Mock Firebase Firestore
 vi.mock("firebase/firestore", async (importOriginal) => {

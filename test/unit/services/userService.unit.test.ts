@@ -1,9 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { query, collection, where, getDocs } from "firebase/firestore";
-import { login, getUserById } from "../../src/services/userService";
-import { db } from "../../src/config/firebaseConfig";
-import { createUserFixture } from "../fixtures/user.fixture";
+import { login, getUserById } from "@/services/userService";
+import { db } from "@/config/firebaseConfig";
+import { createUserFixture } from "../../fixtures/user.fixture";
 
 // Mock Firebase Auth
 vi.mock("firebase/auth", async (importOriginal) => {

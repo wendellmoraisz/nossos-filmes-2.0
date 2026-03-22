@@ -1,9 +1,9 @@
 import { describe, it, expect, vi } from "vitest";
-import MovieCard from "../../src/components/MovieCard";
-import { createMovieFixture } from "../fixtures/movie.fixture";
-import { getEvaluationDescription } from "../../src/utils/evaluationUtils";
+import MovieCard from "@/components/MovieCard";
+import { createMovieFixture } from "@test/fixtures/movie.fixture";
+import { getEvaluationDescription } from "@/utils/evaluationUtils";
 
-vi.mock("../../src/utils/evaluationUtils", () => ({
+vi.mock("@/utils/evaluationUtils", () => ({
   getEvaluationDescription: vi.fn((val) => `Description for ${val}`),
 }));
 
@@ -29,7 +29,7 @@ vi.mock("@mui/icons-material/InfoOutlined", () => ({
   default: () => "InfoIcon",
 }));
 
-vi.mock("./Loading", () => ({
+vi.mock("@/components/Loading", () => ({
   default: () => "LoadingComponent",
 }));
 

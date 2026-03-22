@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { convertMinutesToHours } from "../../src/utils/convertMinutesToHours";
+import { convertMinutesToHours } from "@/utils/convertMinutesToHours";
 
 describe("convertMinutesToHours", () => {
   describe("less than 60 minutes", () => {

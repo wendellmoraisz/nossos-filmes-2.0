@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { useState, useRef } from "react";
-import OptionsDialog from "../../src/components/OptionsDialog";
+import OptionsDialog from "@/components/OptionsDialog";
 
 vi.mock("react", async (importOriginal) => {
   const actual = await importOriginal<typeof import("react")>();

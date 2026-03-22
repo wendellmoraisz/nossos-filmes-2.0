@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import useMoviesMutate from "../../src/hooks/useMoviesMutate";
+import useMoviesMutate from "@/hooks/useMoviesMutate";
 
 vi.mock("@tanstack/react-query", async (importOriginal) => {
   const actual = await importOriginal<typeof import("@tanstack/react-query")>();
@@ -11,7 +11,7 @@ vi.mock("@tanstack/react-query", async (importOriginal) => {
   };
 });
 
-import { createMovieFixture } from "../fixtures/movie.fixture";
+import { createMovieFixture } from "../../fixtures/movie.fixture";
 
 describe("useMoviesMutate", () => {
   const mockMovie = createMovieFixture({

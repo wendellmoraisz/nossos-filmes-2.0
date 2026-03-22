@@ -1,4 +1,4 @@
-import Movie from "../../src/@types/Movie";
+import Movie from "@/@types/Movie";
 
 export function createMovieFixture(overrides?: Partial<Movie>): Movie {
   return {

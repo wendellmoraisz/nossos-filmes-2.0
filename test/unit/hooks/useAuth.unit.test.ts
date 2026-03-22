@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
 import { useContext } from "react";
-import useAuth from "../../src/hooks/useAuth";
-import { AuthContext } from "../../src/context/AuthProvider";
+import useAuth from "@/hooks/useAuth";
+import { AuthContext } from "@/context/AuthProvider";
 
 vi.mock("react", async (importOriginal) => {
   const actual = await importOriginal<typeof import("react")>();

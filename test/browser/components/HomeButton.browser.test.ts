@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import HomeButton from "../../src/components/HomeButton";
+import HomeButton from "@/components/HomeButton";
 
 vi.mock("react-router-dom", async (importOriginal) => {
   const actual = await importOriginal<typeof import("react-router-dom")>();

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getYearFromReleaseDate } from "../../src/utils/getYearFromReleaseDate";
+import { getYearFromReleaseDate } from "@/utils/getYearFromReleaseDate";
 
 describe("getYearFromReleaseDate", () => {
   it("should extract the year from a standard ISO date string", () => {

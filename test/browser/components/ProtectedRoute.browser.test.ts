@@ -1,11 +1,9 @@
 import { describe, it, expect, vi } from "vitest";
-import ProtectedRoute from "../../src/components/ProtectedRoute";
-import useAuth from "../../src/hooks/useAuth";
+import ProtectedRoute from "@/components/ProtectedRoute";
+import useAuth from "@/hooks/useAuth";
 import { Navigate, Outlet } from "react-router-dom";
 
-vi.mock("../../src/hooks/useAuth", () => ({
-  default: vi.fn(),
-}));
+vi.mock("@/hooks/useAuth");
 
 vi.mock("react-router-dom", async (importOriginal) => {
   const actual = await importOriginal<typeof import("react-router-dom")>();

@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import {
   getEvaluationDescription,
   getEvaluationValue,
-} from "../../src/utils/evaluationUtils";
+} from "@/utils/evaluationUtils";
 
 describe("evaluationUtils", () => {
   describe("getEvaluationDescription", () => {

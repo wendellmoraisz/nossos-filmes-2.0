@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import FilterWatchedButton from "../../src/components/FilterWatchedButton";
+import FilterWatchedButton from "@/components/FilterWatchedButton";
 
 vi.mock("@mui/icons-material/VisibilityOff", () => ({
   default: () => "VisibilityOffIcon",

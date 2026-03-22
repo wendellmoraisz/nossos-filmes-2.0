@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import AddMovieButton from "../../src/components/AddMovieButton";
+import AddMovieButton from "@/components/AddMovieButton";
 
 vi.mock("react-router-dom", async (importOriginal) => {
   const actual = await importOriginal<typeof import("react-router-dom")>();

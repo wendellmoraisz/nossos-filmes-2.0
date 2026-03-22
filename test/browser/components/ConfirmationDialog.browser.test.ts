@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import ConfirmationDialog from "../../src/components/ConfirmationDialog";
+import ConfirmationDialog from "@/components/ConfirmationDialog";
 
 vi.mock("@mui/material/Button", () => ({
   default: vi.fn(({ children, onClick }) => ({

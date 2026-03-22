@@ -1,9 +1,9 @@
 import { describe, it, expect, vi } from "vitest";
 import { useQuery } from "@tanstack/react-query";
-import useMoviesData from "../../src/hooks/useMoviesData";
-import { getMoviesByWatcherIdAndListCategory } from "../../src/services/moviesService";
+import useMoviesData from "@/hooks/useMoviesData";
+import { getMoviesByWatcherIdAndListCategory } from "@/services/moviesService";
 
-import { createMovieFixture } from "../fixtures/movie.fixture";
+import { createMovieFixture } from "../../fixtures/movie.fixture";
 
 vi.mock("@tanstack/react-query", async (importOriginal) => {
   const actual = await importOriginal<typeof import("@tanstack/react-query")>();
@@ -13,9 +13,9 @@ vi.mock("@tanstack/react-query", async (importOriginal) => {
   };
 });
 
-vi.mock("../../src/services/moviesService", async (importOriginal) => {
+vi.mock("@/services/moviesService", async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import("../../src/services/moviesService")>();
+    await importOriginal<typeof import("@/services/moviesService")>();
   return {
     ...actual,
     getMoviesByWatcherIdAndListCategory: vi.fn(),

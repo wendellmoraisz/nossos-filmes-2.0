@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
 import { useState } from "react";
-import ChoseForMeButton from "../../src/components/ChoseForMeButton";
-import * as ChoseForMeModalModule from "../../src/components/ChoseForMeModal";
+import ChoseForMeButton from "@/components/ChoseForMeButton";
+import * as ChoseForMeModalModule from "@/components/ChoseForMeModal";
 const ChoseForMeModal = ChoseForMeModalModule.default;
 
 vi.mock("react", async (importOriginal) => {
@@ -12,11 +12,11 @@ vi.mock("react", async (importOriginal) => {
   };
 });
 
-vi.mock("../../src/components/ChoseForMeModal", () => ({
+vi.mock("@/components/ChoseForMeModal", () => ({
   default: vi.fn(),
 }));
 
-vi.mock("../../src/components/Loading", () => ({
+vi.mock("@/components/Loading", () => ({
   default: () => "LoadingComponent",
 }));
 

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import Loading from "../../src/components/Loading";
+import Loading from "@/components/Loading";
 
 describe("Loading", () => {
   it("should render without crashing", () => {
