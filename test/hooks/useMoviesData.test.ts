@@ -5,13 +5,22 @@ import { getMoviesByWatcherIdAndListCategory } from "../../src/services/moviesSe
 
 import { createMovieFixture } from "../fixtures/movie.fixture";
 
-vi.mock("@tanstack/react-query", () => ({
-  useQuery: vi.fn(),
-}));
+vi.mock("@tanstack/react-query", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@tanstack/react-query")>();
+  return {
+    ...actual,
+    useQuery: vi.fn(),
+  };
+});
 
-vi.mock("../../src/services/moviesService", () => ({
-  getMoviesByWatcherIdAndListCategory: vi.fn(),
-}));
+vi.mock("../../src/services/moviesService", async (importOriginal) => {
+  const actual =
+    await importOriginal<typeof import("../../src/services/moviesService")>();
+  return {
+    ...actual,
+    getMoviesByWatcherIdAndListCategory: vi.fn(),
+  };
+});
 
 describe("useMoviesData", () => {
   const watcherId = "user1";

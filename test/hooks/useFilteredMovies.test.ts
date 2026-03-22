@@ -4,10 +4,14 @@ import useFilteredMovies from "../../src/hooks/useFilteredMovies";
 import Movie from "../../src/@types/Movie";
 import { createMoviesFixture } from "../fixtures/movie.fixture";
 
-vi.mock("react", () => ({
-  useState: vi.fn(),
-  useMemo: vi.fn(),
-}));
+vi.mock("react", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("react")>();
+  return {
+    ...actual,
+    useState: vi.fn(),
+    useMemo: vi.fn(),
+  };
+});
 
 describe("useFilteredMovies", () => {
   const mockMovies: Movie[] = createMoviesFixture(2);

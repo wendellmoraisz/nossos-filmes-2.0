@@ -2,10 +2,14 @@ import { describe, it, expect, vi } from "vitest";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useMoviesMutate from "../../src/hooks/useMoviesMutate";
 
-vi.mock("@tanstack/react-query", () => ({
-  useMutation: vi.fn(),
-  useQueryClient: vi.fn(),
-}));
+vi.mock("@tanstack/react-query", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@tanstack/react-query")>();
+  return {
+    ...actual,
+    useMutation: vi.fn(),
+    useQueryClient: vi.fn(),
+  };
+});
 
 import { createMovieFixture } from "../fixtures/movie.fixture";
 
