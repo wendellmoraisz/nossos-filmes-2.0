@@ -24,11 +24,14 @@ import ConfirmationDialog from "../../components/ConfirmationDialog";
 import ChoseForMeButton from "../../components/ChoseForMeButton";
 import FilterWatchedButton from "../../components/FilterWatchedButton";
 import useFilteredMovies from "../../hooks/useFilteredMovies";
+import STORAGE_KEYS from "../../config/storageKeys";
 
 const OurMovies = () => {
   const { data, isLoading } = useMoviesData("we", "pair-list");
-  const { filteredMovies, showUnwatchedOnly, toggleFilter } =
-    useFilteredMovies(data);
+  const { filteredMovies, showUnwatchedOnly, toggleFilter } = useFilteredMovies(
+    data,
+    STORAGE_KEYS.FILTER_UNWATCHED.OUR_MOVIES,
+  );
   const [openEvaluationDialog, setOpenEvaluationDialog] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
