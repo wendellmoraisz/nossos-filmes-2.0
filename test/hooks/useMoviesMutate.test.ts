@@ -1,20 +1,21 @@
 import { describe, it, expect, vi } from "vitest";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useMoviesMutate from "../../src/hooks/useMoviesMutate";
-import Movie from "../../src/@types/Movie";
 
 vi.mock("@tanstack/react-query", () => ({
   useMutation: vi.fn(),
   useQueryClient: vi.fn(),
 }));
 
+import { createMovieFixture } from "../fixtures/movie.fixture";
+
 describe("useMoviesMutate", () => {
-  const mockMovie: Movie = {
-    id: "1",
+  const mockMovie = createMovieFixture({
+    id: 1,
     watcher: "user1",
     listCategory: "watchlist",
     title: "Inception",
-  } as unknown as Movie;
+  });
 
   it("should initialize mutations and return them", () => {
     const mockQueryClient = { invalidateQueries: vi.fn() };

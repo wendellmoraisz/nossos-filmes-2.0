@@ -3,6 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import useMoviesData from "../../src/hooks/useMoviesData";
 import { getMoviesByWatcherIdAndListCategory } from "../../src/services/moviesService";
 
+import { createMovieFixture } from "../fixtures/movie.fixture";
+
 vi.mock("@tanstack/react-query", () => ({
   useQuery: vi.fn(),
 }));
@@ -12,11 +14,12 @@ vi.mock("../../src/services/moviesService", () => ({
 }));
 
 describe("useMoviesData", () => {
-  it("should call useQuery with correct parameters", () => {
-    const watcherId = "user1";
-    const listCategory = "favorites";
-    const mockQueryValue = { data: [], isLoading: false };
+  const watcherId = "user1";
+  const listCategory = "watchlist";
+  const mockMovie = createMovieFixture({ watcher: watcherId, listCategory });
+  const mockQueryValue = { data: [mockMovie], isLoading: false };
 
+  it("should call useQuery with correct parameters", () => {
     vi.mocked(useQuery).mockReturnValue(mockQueryValue as any);
 
     const result = useMoviesData(watcherId, listCategory);

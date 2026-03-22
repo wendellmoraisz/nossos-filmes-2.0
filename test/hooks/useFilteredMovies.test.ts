@@ -2,18 +2,20 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { useState, useMemo } from "react";
 import useFilteredMovies from "../../src/hooks/useFilteredMovies";
 import Movie from "../../src/@types/Movie";
+import { createMoviesFixture } from "../fixtures/movie.fixture";
 
-// Mock React hooks
 vi.mock("react", () => ({
   useState: vi.fn(),
   useMemo: vi.fn(),
 }));
 
 describe("useFilteredMovies", () => {
-  const mockMovies: Movie[] = [
-    { id: "1", title: "Watched Movie", watched: true } as unknown as Movie,
-    { id: "2", title: "Unwatched Movie", watched: false } as unknown as Movie,
-  ];
+  const mockMovies: Movie[] = createMoviesFixture(2);
+  mockMovies[0].title = "Watched Movie";
+  mockMovies[0].watched = true;
+  mockMovies[1].title = "Unwatched Movie";
+  mockMovies[1].watched = false;
+
   const storageKey = "test-storage-key";
 
   beforeEach(() => {
@@ -55,7 +57,7 @@ describe("useFilteredMovies", () => {
     const { filteredMovies } = useFilteredMovies(mockMovies, storageKey);
 
     expect(filteredMovies).toHaveLength(1);
-    expect(filteredMovies[0].id).toBe("2");
+    expect(filteredMovies[0].id).toBe(2);
   });
 
   it("should return all movies when showUnwatchedOnly is false", () => {

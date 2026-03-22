@@ -40,12 +40,18 @@ describe("userService", () => {
       const mockUserCredential = { user: { uid: "123" } };
 
       vi.mocked(getAuth).mockReturnValue(mockAuth as any);
-      vi.mocked(signInWithEmailAndPassword).mockResolvedValue(mockUserCredential as any);
+      vi.mocked(signInWithEmailAndPassword).mockResolvedValue(
+        mockUserCredential as any,
+      );
 
       const result = await login(email, password);
 
       expect(getAuth).toHaveBeenCalled();
-      expect(signInWithEmailAndPassword).toHaveBeenCalledWith(mockAuth, email, password);
+      expect(signInWithEmailAndPassword).toHaveBeenCalledWith(
+        mockAuth,
+        email,
+        password,
+      );
       expect(result).toBe(mockUserCredential);
     });
   });

@@ -59,7 +59,10 @@ describe("moviesService", () => {
       };
       vi.mocked(getDocs).mockResolvedValue(mockSnapshot as any);
 
-      const result = await getMoviesByWatcherIdAndListCategory("user1", "watchlist");
+      const result = await getMoviesByWatcherIdAndListCategory(
+        "user1",
+        "watchlist",
+      );
 
       expect(getDocs).toHaveBeenCalled();
       expect(result).toEqual([mockMovie]);
@@ -80,7 +83,10 @@ describe("moviesService", () => {
       await updateMovie(mockMovie);
 
       expect(getDocs).toHaveBeenCalled();
-      expect(updateDoc).toHaveBeenCalledWith("doc-ref", expect.objectContaining(mockMovie));
+      expect(updateDoc).toHaveBeenCalledWith(
+        "doc-ref",
+        expect.objectContaining(mockMovie),
+      );
     });
 
     it("should delete a movie", async () => {

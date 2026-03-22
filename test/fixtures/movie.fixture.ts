@@ -17,8 +17,11 @@ export function createMovieFixture(overrides?: Partial<Movie>): Movie {
   } as unknown as Movie;
 }
 
-export function createMoviesFixture(count: number, overrides?: Partial<Movie>): Movie[] {
-  return Array.from({ length: count }, (_, i) => 
-    createMovieFixture({ id: i + 1, ...overrides })
+export function createMoviesFixture(
+  count: number,
+  overrides?: Partial<Movie>,
+): Movie[] {
+  return Array.from({ length: count }, (_, i) =>
+    createMovieFixture({ id: i + 1, ...overrides }),
   );
 }
