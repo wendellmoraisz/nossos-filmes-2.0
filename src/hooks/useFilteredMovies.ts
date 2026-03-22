@@ -1,8 +1,10 @@
 import { useState, useMemo } from "react";
 import Movie from "../@types/Movie";
 
-const useFilteredMovies = (movies: Movie[] | undefined) => {
-  const [showUnwatchedOnly, setShowUnwatchedOnly] = useState(false);
+const useFilteredMovies = (movies: Movie[] | undefined, storageKey: string) => {
+  const [showUnwatchedOnly, setShowUnwatchedOnly] = useState<boolean>(() => {
+    return localStorage.getItem(storageKey) === "true";
+  });
 
   const filteredMovies = useMemo(() => {
     if (!movies) return [];
@@ -10,7 +12,13 @@ const useFilteredMovies = (movies: Movie[] | undefined) => {
     return movies.filter((movie) => !movie.watched);
   }, [movies, showUnwatchedOnly]);
 
-  const toggleFilter = () => setShowUnwatchedOnly((prev) => !prev);
+  const toggleFilter = () => {
+    setShowUnwatchedOnly((prev) => {
+      const next = !prev;
+      localStorage.setItem(storageKey, String(next));
+      return next;
+    });
+  };
 
   return {
     filteredMovies,

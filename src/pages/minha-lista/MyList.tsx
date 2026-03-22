@@ -11,6 +11,7 @@ import Loading from "../../components/Loading";
 import AddMovieButton from "../../components/AddMovieButton";
 import FilterWatchedButton from "../../components/FilterWatchedButton";
 import useFilteredMovies from "../../hooks/useFilteredMovies";
+import STORAGE_KEYS from "../../config/storageKeys";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import Movie from "../../@types/Movie";
@@ -32,8 +33,10 @@ const MyList = () => {
     user?.id as string,
     "personal-list",
   );
-  const { filteredMovies, showUnwatchedOnly, toggleFilter } =
-    useFilteredMovies(data);
+  const { filteredMovies, showUnwatchedOnly, toggleFilter } = useFilteredMovies(
+    data,
+    STORAGE_KEYS.FILTER_UNWATCHED.MY_LIST,
+  );
   const [openEvaluationDialog, setOpenEvaluationDialog] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
