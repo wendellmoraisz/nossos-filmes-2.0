@@ -1,3 +1,3 @@
 export function getYearFromReleaseDate(releaseDate: string) {
-  return new Date(releaseDate).getFullYear();
+  return new Date(releaseDate).getUTCFullYear();
 }
