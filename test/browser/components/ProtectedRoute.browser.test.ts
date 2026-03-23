@@ -3,18 +3,10 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import useAuth from "@/hooks/useAuth";
 import { Navigate, Outlet } from "react-router-dom";
 
-const mockFirebase = vi.hoisted(() => ({
-  auth: {
-    currentUser: null,
-    onAuthStateChanged: vi.fn(),
-    signOut: vi.fn(),
-    signInWithEmailAndPassword: vi.fn(),
-  },
-  db: { _type: "firestore_db" },
-  app: { name: "[DEFAULT]", options: {} },
-}));
-
-vi.mock("@/config/firebaseConfig", () => mockFirebase);
+vi.mock(
+  "@/config/firebaseConfig",
+  () => import("../../fixtures/firebaseConfig.fixture"),
+);
 
 vi.mock("@/hooks/useAuth");
 
