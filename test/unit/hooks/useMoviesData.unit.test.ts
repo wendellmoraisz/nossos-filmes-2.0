@@ -3,6 +3,11 @@ import { useQuery } from "@tanstack/react-query";
 import useMoviesData from "@/hooks/useMoviesData";
 import { getMoviesByWatcherIdAndListCategory } from "@/services/moviesService";
 
+vi.mock(
+  "@/config/firebaseConfig",
+  () => import("../../fixtures/firebaseConfig.fixture"),
+);
+
 import { createMovieFixture } from "../../fixtures/movie.fixture";
 
 vi.mock("@tanstack/react-query", async (importOriginal) => {

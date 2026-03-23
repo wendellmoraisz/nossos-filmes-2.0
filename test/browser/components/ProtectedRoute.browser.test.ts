@@ -3,6 +3,11 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import useAuth from "@/hooks/useAuth";
 import { Navigate, Outlet } from "react-router-dom";
 
+vi.mock(
+  "@/config/firebaseConfig",
+  () => import("../../fixtures/firebaseConfig.fixture"),
+);
+
 vi.mock("@/hooks/useAuth");
 
 vi.mock("react-router-dom", async (importOriginal) => {

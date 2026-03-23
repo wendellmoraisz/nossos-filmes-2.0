@@ -2,8 +2,13 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { query, collection, where, getDocs } from "firebase/firestore";
 import { login, getUserById } from "@/services/userService";
-import { db } from "@/config/firebaseConfig";
+import { db as mockDb } from "../../fixtures/firebaseConfig.fixture";
 import { createUserFixture } from "../../fixtures/user.fixture";
+
+vi.mock(
+  "@/config/firebaseConfig",
+  () => import("../../fixtures/firebaseConfig.fixture"),
+);
 
 // Mock Firebase Auth
 vi.mock("firebase/auth", async (importOriginal) => {
@@ -72,7 +77,7 @@ describe("userService", () => {
 
       const result = await getUserById(id);
 
-      expect(collection).toHaveBeenCalledWith(db, "users");
+      expect(collection).toHaveBeenCalledWith(mockDb, "users");
       expect(where).toHaveBeenCalledWith("id", "==", id);
       expect(query).toHaveBeenCalled();
       expect(getDocs).toHaveBeenCalled();
