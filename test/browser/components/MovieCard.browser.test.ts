@@ -26,6 +26,7 @@ vi.mock("@mui/material", () => ({
 }));
 
 vi.mock("@mui/icons-material/InfoOutlined", () => ({
+  __esModule: true,
   default: () => "InfoIcon",
 }));
 

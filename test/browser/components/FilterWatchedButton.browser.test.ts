@@ -2,9 +2,11 @@ import { describe, it, expect, vi } from "vitest";
 import FilterWatchedButton from "@/components/FilterWatchedButton";
 
 vi.mock("@mui/icons-material/VisibilityOff", () => ({
+  __esModule: true,
   default: () => "VisibilityOffIcon",
 }));
 vi.mock("@mui/icons-material/Visibility", () => ({
+  __esModule: true,
   default: () => "VisibilityIcon",
 }));
 
