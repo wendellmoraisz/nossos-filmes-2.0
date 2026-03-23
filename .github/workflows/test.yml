@@ -1,4 +1,4 @@
-name: Continuous Integration - Nossos Filmes
+name: CI - Nossos Filmes
 
 on:
   push:
