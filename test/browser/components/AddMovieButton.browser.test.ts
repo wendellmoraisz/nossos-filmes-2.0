@@ -13,6 +13,7 @@ vi.mock("react-router-dom", async (importOriginal) => {
 });
 
 vi.mock("@mui/icons-material/Add", () => ({
+  __esModule: true,
   default: () => "AddIcon",
 }));
 

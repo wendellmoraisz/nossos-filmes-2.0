@@ -3,6 +3,11 @@ import { useContext } from "react";
 import useAuth from "@/hooks/useAuth";
 import { AuthContext } from "@/context/AuthProvider";
 
+vi.mock(
+  "@/config/firebaseConfig",
+  () => import("../../fixtures/firebaseConfig.fixture"),
+);
+
 vi.mock("react", async (importOriginal) => {
   const actual = await importOriginal<typeof import("react")>();
   return {

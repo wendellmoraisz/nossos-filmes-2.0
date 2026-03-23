@@ -4,6 +4,11 @@ import ChoseForMeButton from "@/components/ChoseForMeButton";
 import * as ChoseForMeModalModule from "@/components/ChoseForMeModal";
 const ChoseForMeModal = ChoseForMeModalModule.default;
 
+vi.mock("@mui/icons-material/Cyclone", () => ({
+  __esModule: true,
+  default: () => "CycloneIcon",
+}));
+
 vi.mock("react", async (importOriginal) => {
   const actual = await importOriginal<typeof import("react")>();
   return {

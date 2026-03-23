@@ -2,6 +2,11 @@ import { describe, it, expect, vi } from "vitest";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useMoviesMutate from "@/hooks/useMoviesMutate";
 
+vi.mock(
+  "@/config/firebaseConfig",
+  () => import("../../fixtures/firebaseConfig.fixture"),
+);
+
 vi.mock("@tanstack/react-query", async (importOriginal) => {
   const actual = await importOriginal<typeof import("@tanstack/react-query")>();
   return {
