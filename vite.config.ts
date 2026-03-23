@@ -45,4 +45,7 @@ export default defineConfig({
       },
     ],
   },
+  optimizeDeps: {
+    include: ["@mui/material/Typography"],
+  },
 });
