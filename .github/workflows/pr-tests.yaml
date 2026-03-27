@@ -1,0 +1,10 @@
+name: PR Tests
+on:
+  pull_request:
+    branches:
+      - main
+      - development
+
+jobs:
+  Run-Tests:
+    uses: ./.github/workflows/tests.yaml
