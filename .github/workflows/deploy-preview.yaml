@@ -8,24 +8,7 @@ on:
       - development
 jobs:
   Tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
-          cache: true
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          cache: "pnpm"
-      - name: Install dependencies
-        run: pnpm install
-      - name: Install Playwright Browsers
-        run: pnpm dlx playwright install chromium --with-deps
-      - name: Run tests
-        run: pnpm test
+    uses: ./.github/workflows/tests.yaml
 
   Deploy-Preview:
     needs: Tests
