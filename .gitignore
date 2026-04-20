@@ -12,6 +12,14 @@ dist
 dist-ssr
 *.local
 
+# Vitest
+.vitest*
+__screenshots__
+
+# AI
+.agents
+.codex
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -1,10 +1,4 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  getMovieDetails,
-  getMovieStreamingProviders,
-} from "../../services/moviesService";
-import Movie from "../../@types/Movie";
 import { MOVIE_POSTER_BASE_URL } from "../../data/constants/theMoviesDb";
 import {
   Accordion,
@@ -39,25 +33,19 @@ import {
   MovieBannerContainer,
 } from "./MovieDescriptionStyled";
 import utorrentLogo from "../../assets/utorrent-logo.png";
+import useMovieDetailsData from "../../hooks/useMovieDetailsData";
 
 const MovieDescription = () => {
   const { movieId } = useParams<{ movieId: string }>();
-  const [movieDetails, setMovieDetails] = useState<Movie | null>(null);
+  const { data: movieDetails, isLoading } = useMovieDetailsData(
+    Number(movieId),
+  );
 
-  useEffect(() => {
-    const getMovie = async () => {
-      const response = await getMovieDetails(Number(movieId));
-      const streamingProvidersData = await getMovieStreamingProviders(
-        Number(movieId),
-      );
-      response.watch_providers =
-        streamingProvidersData.results?.BR?.flatrate ?? [];
-      setMovieDetails(response);
-    };
-    getMovie();
-  }, [movieId]);
+  if (isLoading || !movieDetails) return <Loading />;
 
-  if (!movieDetails) return <Loading />;
+  const directors = movieDetails.credits?.crew.filter(
+    (member) => member.job === "Director",
+  );
 
   return (
     <Container>
@@ -107,7 +95,10 @@ const MovieDescription = () => {
             <CategoryTitle>Gêneros</CategoryTitle>
             <MovieGenresContainer>
               {movieDetails?.genres.map((genre, index) => (
-                <>
+                <div
+                  key={genre.id}
+                  style={{ display: "flex", gap: "20px", alignItems: "center" }}
+                >
                   {genre.name}
                   {index !== (movieDetails?.genres?.length ?? 0) - 1 && (
                     <Divider
@@ -116,7 +107,7 @@ const MovieDescription = () => {
                       flexItem
                     />
                   )}
-                </>
+                </div>
               ))}
             </MovieGenresContainer>
           </>
@@ -127,7 +118,7 @@ const MovieDescription = () => {
             {(movieDetails?.watch_providers?.length ?? 0) > 0 ? (
               <MovieGenresContainer>
                 {movieDetails?.watch_providers?.map((provider) => (
-                  <WatchProvidersContainer>
+                  <WatchProvidersContainer key={provider.provider_id}>
                     <a
                       target="_blank"
                       href={`https://themoviedb.org/movie/${movieId}/watch`}
@@ -153,6 +144,29 @@ const MovieDescription = () => {
                 </a>
               </WatchProvidersContainer>
             )}
+          </>
+        )}
+
+        {directors && directors.length > 0 && (
+          <>
+            <CategoryTitle>Direção</CategoryTitle>
+            <MovieGenresContainer>
+              {directors.map((director, index) => (
+                <div
+                  key={director.id}
+                  style={{ display: "flex", gap: "20px", alignItems: "center" }}
+                >
+                  {director.name}
+                  {index !== (directors?.length ?? 0) - 1 && (
+                    <Divider
+                      orientation="vertical"
+                      variant="fullWidth"
+                      flexItem
+                    />
+                  )}
+                </div>
+              ))}
+            </MovieGenresContainer>
           </>
         )}
         <Accordion

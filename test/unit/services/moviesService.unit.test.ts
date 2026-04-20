@@ -137,7 +137,7 @@ describe("moviesService", () => {
       expect(result).toEqual([mockMovie]);
     });
 
-    it("should fetch movie details", async () => {
+    it("should fetch movie details with credits", async () => {
       vi.mocked(fetch).mockResolvedValue({
         json: async () => mockMovie,
       } as any);
@@ -145,7 +145,9 @@ describe("moviesService", () => {
       const result = await getMovieDetails(1);
 
       expect(fetch).toHaveBeenCalledWith(
-        expect.stringContaining("movie/1"),
+        expect.stringContaining(
+          "movie/1?language=pt-BR&append_to_response=credits",
+        ),
         expect.any(Object),
       );
       expect(result).toEqual(mockMovie);
