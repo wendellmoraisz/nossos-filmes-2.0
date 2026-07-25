@@ -85,7 +85,7 @@ export async function getUnwatchedMovies(
 }
 
 export async function getMovieDetails(movieId: number): Promise<Movie> {
-  const movieDetailsUrl = `${BASE_URL}/movie/${movieId}?language=pt-BR`;
+  const movieDetailsUrl = `${BASE_URL}/movie/${movieId}?language=pt-BR&append_to_response=credits`;
   const response = await fetch(movieDetailsUrl, {
     headers: {
       accept: "application/json",

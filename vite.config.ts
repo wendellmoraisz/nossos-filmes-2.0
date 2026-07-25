@@ -13,6 +13,7 @@ export default defineConfig({
     },
   },
   test: {
+    setupFiles: ["./test/setup.ts"],
     projects: [
       {
         extends: true,
@@ -31,8 +32,8 @@ export default defineConfig({
         test: {
           name: "browser",
           include: [
-            "test/browser/**/*.{test,spec}.ts",
-            "test/**/*.browser.{test,spec}.ts",
+            "test/browser/**/*.{test,spec}.{ts,tsx}",
+            "test/**/*.browser.{test,spec}.{ts,tsx}",
           ],
           browser: {
             enabled: true,
@@ -46,6 +47,6 @@ export default defineConfig({
     ],
   },
   optimizeDeps: {
-    include: ["@mui/material/Typography"],
+    include: ["@mui/material/Typography", "vitest-browser-react"],
   },
 });

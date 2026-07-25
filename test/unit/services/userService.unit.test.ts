@@ -5,10 +5,6 @@ import { login, getUserById } from "@/services/userService";
 import { db as mockDb } from "../../fixtures/firebaseConfig.fixture";
 import { createUserFixture } from "../../fixtures/user.fixture";
 
-vi.mock(
-  "@/config/firebaseConfig",
-  () => import("../../fixtures/firebaseConfig.fixture"),
-);
 
 // Mock Firebase Auth
 vi.mock("firebase/auth", async (importOriginal) => {

@@ -13,6 +13,10 @@ export function createMovieFixture(overrides?: Partial<Movie>): Movie {
     watcher: "user1",
     watched: false,
     runtime: 120,
+    credits: {
+      cast: [],
+      crew: [],
+    },
     ...overrides,
   } as unknown as Movie;
 }
