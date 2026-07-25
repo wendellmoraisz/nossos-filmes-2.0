@@ -4,6 +4,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](#)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)](#)
 [![Firebase](https://img.shields.io/badge/Firebase-FFCA28?logo=firebase&logoColor=white)](#)
+[![TMDB](https://img.shields.io/badge/TMDB-01B4E4?logo=themoviedatabase&logoColor=white)](#)
 
 An application to manage, filter, and track movies collaboratively, making it easy to decide what to watch next.
 
@@ -19,6 +20,7 @@ The application is a Single Page Application (SPA) built with React and Vite. It
 - "Choose for me" random movie selector
 - Persistent user preferences via Local Storage
 - Real-time data integration with Firebase
+- Movie details and metadata fetched from [TMDB API](https://www.themoviedb.org/)
 
 The project follows a component-based modular architecture and is organized into the following main layers:
 
@@ -28,6 +30,7 @@ graph TD;
     Hooks --> Context[Context API];
     Hooks --> Services[Services Layer];
     Services --> DB[(Firebase)];
+    Services --> TMDB[TMDB API];
 ```
 
 #### Pages & Components
@@ -37,7 +40,7 @@ Contains the user interface, separating layout from logic. `Pages` map to specif
 Encapsulates complex logic and state management. Custom hooks are used for filtering data, interacting with `React Query` for data fetching, and handling local storage configurations. The Context API manages global states.
 
 #### Services
-Responsible for data access and storage operations. It acts as an abstraction layer for interacting with Firebase, ensuring the UI layers do not directly depend on the database implementation.
+Responsible for data access and storage operations. It acts as an abstraction layer for interacting with Firebase and fetching movie data from the external TMDB API, ensuring the UI layers do not directly depend on the database or external implementations.
 
 #### Utils, Config & Common
 Contains helper formatting functions, application-wide configurations, and shared styles, maintaining a clean and DRY (Don't Repeat Yourself) codebase.
