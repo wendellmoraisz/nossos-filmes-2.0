@@ -19,10 +19,6 @@ import {
 } from "@/services/moviesService";
 import { createMovieFixture } from "../../fixtures/movie.fixture";
 
-vi.mock(
-  "@/config/firebaseConfig",
-  () => import("../../fixtures/firebaseConfig.fixture"),
-);
 
 // Mock Firebase Firestore
 vi.mock("firebase/firestore", async (importOriginal) => {
