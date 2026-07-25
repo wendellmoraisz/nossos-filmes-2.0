@@ -64,3 +64,21 @@ Install the dependencies and run the development server:
   # Run the application
   pnpm dev
 ```
+
+### Running Tests
+
+This project uses Vitest for testing. You can run the tests using the following commands:
+
+```bash
+  # Run all tests
+  pnpm test
+
+  # Run tests in watch mode
+  pnpm test:watch
+
+  # Run unit tests
+  pnpm test:unit
+
+  # Run browser tests
+  pnpm test:browser
+```
