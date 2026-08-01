@@ -92,4 +92,37 @@ describe("AddMovie", () => {
 
     expect(mockMutateAsync).toHaveBeenCalledWith(expect.objectContaining({ id: 1, title: "Test Movie 1", watcher: "123", listCategory: "watchlist", watched: false }));
   });
+
+  it("should trigger search automatically after typing (debounce)", async () => {
+    const mockMovies = [
+      createMovieFixture({ id: 99, title: "Debounce Movie" }),
+    ];
+    vi.mocked(searchMoviesByTitle).mockResolvedValue(mockMovies);
+
+    render(<MemoryRouter><AddMovie /></MemoryRouter>);
+
+    await userEvent.fill(page.getByLabelText("Pesquisar"), "Debounce Movie");
+
+    // Should call search without clicking the button after debounce
+    await vi.waitFor(() => {
+      expect(searchMoviesByTitle).toHaveBeenCalledWith("Debounce Movie");
+    }, { timeout: 1500 });
+
+    await expect.element(page.getByAltText("Debounce Movie")).toBeInTheDocument();
+  });
+
+  it("should show empty message when no movies are found", async () => {
+    vi.mocked(searchMoviesByTitle).mockResolvedValue([]);
+
+    render(<MemoryRouter><AddMovie /></MemoryRouter>);
+
+    await userEvent.fill(page.getByLabelText("Pesquisar"), "NonExistentMovie");
+    await userEvent.click(page.getByRole("button"));
+
+    await vi.waitFor(() => {
+      expect(searchMoviesByTitle).toHaveBeenCalledWith("NonExistentMovie");
+    });
+
+    await expect.element(page.getByText("Não achei nada :/")).toBeInTheDocument();
+  });
 });
