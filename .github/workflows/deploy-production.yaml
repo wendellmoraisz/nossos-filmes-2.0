@@ -13,6 +13,9 @@ jobs:
   Deploy-Production:
     needs: Tests
     runs-on: ubuntu-latest
+    environment:
+      name: Production
+      url: ${{ steps.deploy.outputs.url }}
     steps:
       - uses: actions/checkout@v2
       - uses: pnpm/action-setup@v4
@@ -26,4 +29,7 @@ jobs:
       - name: Build Project Artifacts
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+        id: deploy
+        run: |
+          URL=$(vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }})
+          echo "url=$URL" >> $GITHUB_OUTPUT
