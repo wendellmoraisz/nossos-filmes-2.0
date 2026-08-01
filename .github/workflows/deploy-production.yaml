@@ -1,4 +1,4 @@
-name: Production Deployment
+name: Production
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -7,11 +7,11 @@ on:
     branches:
       - main
 jobs:
-  Tests:
+  test:
     uses: ./.github/workflows/tests.yaml
 
-  Deploy-Production:
-    needs: Tests
+  deploy:
+    needs: test
     runs-on: ubuntu-latest
     environment:
       name: Production
