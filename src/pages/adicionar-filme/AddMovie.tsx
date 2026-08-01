@@ -12,6 +12,7 @@ import {
   TextField,
   InputAdornment,
   IconButton,
+  Typography,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Movie from "../../@types/Movie";
@@ -24,6 +25,8 @@ import { StyledForm } from "./AddMovieStyled";
 
 const AddMovie = () => {
   const [movies, setMovies] = useState<Movie[]>();
+  const [isSearching, setIsSearching] = useState(false);
+  const [lastSearchedValue, setLastSearchedValue] = useState("");
   const { watcherId, listCategory } = useParams();
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
@@ -57,19 +60,46 @@ const AddMovie = () => {
     setOpenDialog(false);
   };
 
-  const { control, handleSubmit, reset } = useForm({
+  const { control, handleSubmit, watch } = useForm({
     mode: "onBlur",
+    defaultValues: {
+      search: "",
+    }
   });
+
+  const searchValue = watch("search");
+
+  const handleSearch = (search: string) => {
+    if (!search || search.trim() === "") {
+      setMovies([]);
+      setLastSearchedValue("");
+      setIsSearching(false);
+      return;
+    }
+    setIsSearching(true);
+    searchMoviesByTitle(search)
+      .then((data) => {
+        setMovies(data);
+        setLastSearchedValue(search);
+      })
+      .finally(() => {
+        setIsSearching(false);
+      });
+  };
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      if (searchValue !== undefined) {
+        handleSearch(searchValue);
+      }
+    }, 500);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchValue]);
 
   useEffect(() => {
     handleCloseDialog();
   }, [addMovie.isSuccess]);
-
-  const handleSearch = (search: string) => {
-    searchMoviesByTitle(search).then((data) => {
-      setMovies(data);
-    });
-  };
 
   return (
     <Container>
@@ -77,7 +107,6 @@ const AddMovie = () => {
         <StyledForm
           onSubmit={handleSubmit((data) => {
             handleSearch(data.search);
-            reset({ search: "" });
           })}
         >
           <FormControl fullWidth>
@@ -107,6 +136,11 @@ const AddMovie = () => {
         </StyledForm>
       </ButtonsContainer>
       <MoviesCardsContainer>
+        {!isSearching && movies?.length === 0 && searchValue === lastSearchedValue && searchValue.trim() !== "" && (
+          <Typography variant="h5" color="text.secondary" sx={{ textAlign: "center", width: "100%", mt: 4, gridColumn: "1 / -1" }}>
+            Não achei nada :/
+          </Typography>
+        )}
         {movies?.map((movie) => {
           const cardButtons = [
             {
